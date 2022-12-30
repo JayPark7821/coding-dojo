@@ -14,6 +14,10 @@ public class CarRacing {
 		this.lapsCompleted = 0;
 	}
 
+	public List<Car> getCars() {
+		return cars;
+	}
+
 	public int generateRandomNumber() {
 		return (int) (Math.random() * 10);
 	}

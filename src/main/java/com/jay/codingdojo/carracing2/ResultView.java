@@ -10,6 +10,7 @@ public class ResultView {
 			.map(car -> car.getName() + " : " + "-".repeat(car.getCurrentPosition()))
 			.collect(Collectors.joining("\n"));
 		System.out.println(currentPosition);
+		System.out.println();
 		return currentPosition;
 	}
 

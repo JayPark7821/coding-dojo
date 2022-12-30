@@ -30,12 +30,12 @@ public class CarTest {
 	void carNameLengthShouldBetween0to5 () throws Exception {
 		assertThrows(
 			IllegalArgumentException.class,
-			()->new com.jay.codingdojo.carracing.Car(""),
+			()->new Car(""),
 			"자동차 이름은 0~5자만 허용 합니다."
 		);
 		assertThrows(
 			IllegalArgumentException.class,
-			()->new com.jay.codingdojo.carracing.Car("test12"),
+			()->new Car("test12"),
 			"자동차 이름은 0~5자만 허용 합니다."
 		);
 	}

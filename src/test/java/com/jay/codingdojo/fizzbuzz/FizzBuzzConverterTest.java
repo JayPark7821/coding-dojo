@@ -49,4 +49,9 @@ public class FizzBuzzConverterTest {
 		assertThat(sut.convert(5)).isEqualTo("Buzz");
 	}
 
+	@Test
+	void fizzBuzzConverterCanConvertMultiplesOfThreeAndFiveToFizzBuzz() {
+		assertThat(sut.convert(15)).isEqualTo("FizzBuzz");
+	}
+
 }

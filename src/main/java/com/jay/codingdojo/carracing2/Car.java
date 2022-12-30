@@ -10,8 +10,10 @@ public class Car {
 		this.position = 0;
 	}
 
-	public void move() {
-		position++;
+	public void move(int randomNumber) {
+		if(randomNumber >= 4) {
+			position++;
+		}
 	}
 
 	public int getCurrentPosition() {

@@ -17,9 +17,12 @@ public class CarTest {
 	}
 
 	@Test
-	void carCanMove() throws Exception {
-		Assertions.assertDoesNotThrow(()-> sut.move());
+	void carCanOnlyMoveRandomNumberIsLargerThen3() throws Exception {
+		Assertions.assertDoesNotThrow(()-> sut.move(2));
+		assertThat(sut.getCurrentPosition()).isEqualTo(0);
+		Assertions.assertDoesNotThrow(()-> sut.move(5));
 		assertThat(sut.getCurrentPosition()).isEqualTo(1);
-
 	}
+
+
 }

@@ -23,13 +23,19 @@ class CarTest {
 	}
 
 	@Test
-	void carNameCantBeLongerThen5 () throws Exception {
-	    assertThrows(
+	void carNameLengthShouldBetween0to5 () throws Exception {
+		assertThrows(
+			IllegalArgumentException.class,
+			()->new Car(""),
+			"자동차 이름은 0~5자만 허용 합니다."
+		);
+		assertThrows(
 			IllegalArgumentException.class,
 			()->new Car("test12"),
-			"자동차 이름은 5자를 초과할 수 없습니다."
+			"자동차 이름은 0~5자만 허용 합니다."
 		);
 	}
+
 
 	@Test
 	void carCanMove () throws Exception {

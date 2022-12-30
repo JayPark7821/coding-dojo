@@ -23,5 +23,15 @@ public class CarRacingTest {
 		assertTrue(randomNumber >= 0 && randomNumber <= 9);
 	}
 
+	@Test
+	void carRacingCanCountLapsTilEnd() throws Exception {
+		assertFalse(sut.isFinished());
+		sut.countLaps();
+		assertFalse(sut.isFinished());
+		sut.countLaps();
+		assertFalse(sut.isFinished());
+		sut.countLaps();
+		assertTrue(sut.isFinished());
+	}
 
 }

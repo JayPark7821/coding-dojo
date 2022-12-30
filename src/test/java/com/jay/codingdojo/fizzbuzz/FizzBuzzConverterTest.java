@@ -47,31 +47,38 @@ public class FizzBuzzConverterTest {
 
 	@Test
 	void fizzBuzzConverterCanConvertMultiplesOfThreeToFizz() {
-		assertThat(sut.convert(3)).isEqualTo("Fizz");
+		assertThat(sut.convert(3)).isEqualTo("FizzFizz");
 	}
 
 	@Test
 	void fizzBuzzConverterCanConvertMultiplesOfFiveToFizz() {
-		assertThat(sut.convert(5)).isEqualTo("Buzz");
+		assertThat(sut.convert(5)).isEqualTo("BuzzBuzz");
 	}
 
 	@Test
 	void fizzBuzzConverterCanConvertMultiplesOfThreeAndFiveToFizzBuzz() {
-		assertThat(sut.convert(15)).isEqualTo("FizzBuzz");
+		assertThat(sut.convert(15)).isEqualTo("FizzBuzzBuzz");
 	}
 
 	@Test
 	void fizzBuzzConverterSholudReturnsGivenNumber() {
 		IntStream.range(0, 100)
 			.filter(i -> i % 3 != 0 && i % 5 != 0)
+			.filter(i -> !String.valueOf(i).contains("3") && !String.valueOf(i).contains("5"))
 			.forEach(i -> assertThat(sut.convert(i)).isEqualTo(String.valueOf(i)));
 	}
 
 	@Test
+	void fizzBuzzConverterCanConvertNumbersWithThreeToFizz() {
+		assertThat(sut.convert(13)).isEqualTo("Fizz");
+	}
+
+	@Test
 	void test() {
-		IntStream.range(1, 100)
+		IntStream.range(1, 101)
 			.mapToObj(sut::convert)
 			.forEach(System.out::println);
 	}
+
 
 }

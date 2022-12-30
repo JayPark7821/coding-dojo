@@ -63,6 +63,11 @@ public class FizzBuzzConverterTest {
 			.forEach(i -> assertThat(sut.convert(i)).isEqualTo(String.valueOf(i)));
 	}
 
-
+	@Test
+	void test() {
+		IntStream.range(1, 100)
+			.mapToObj(sut::convert)
+			.forEach(System.out::println);
+	}
 
 }

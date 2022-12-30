@@ -3,14 +3,14 @@ package com.jay.codingdojo.fizzbuzz;
 public class FizzBuzzConverter {
 
 	public String convert(int number) {
+		String convtertedString = "";
+
 		if(number % 3 == 0) {
-			if(number % 5 == 0) {
-				return "FizzBuzz";
-			}
-			return "Fizz";
-		}else if(number % 5 == 0) {
-			return "Buzz";
+			convtertedString += "Fizz";
 		}
-		return String.valueOf(number);
+		if(number % 5 == 0) {
+			convtertedString += "Buzz";
+		}
+		return convtertedString.isEmpty() ? String.valueOf(number) : convtertedString;
 	}
 }

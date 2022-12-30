@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class CarRacingTest {
 
 	private CarRacing sut;
-	private final List<Car> cars = List.of(new Car("test1"), new Car("test2"), new Car("test3"));
+	private final List<Car> cars = CarFixture.createCars();
 
 	@BeforeEach
 	void setUp() {

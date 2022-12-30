@@ -1,6 +1,7 @@
 package com.jay.codingdojo.carracing2;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,21 @@ public class CarTest {
 		assertThat(sut.getCurrentPosition()).isEqualTo(0);
 		Assertions.assertDoesNotThrow(()-> sut.move(5));
 		assertThat(sut.getCurrentPosition()).isEqualTo(1);
+	}
+
+
+	@Test
+	void carNameLengthShouldBetween0to5 () throws Exception {
+		assertThrows(
+			IllegalArgumentException.class,
+			()->new com.jay.codingdojo.carracing.Car(""),
+			"자동차 이름은 0~5자만 허용 합니다."
+		);
+		assertThrows(
+			IllegalArgumentException.class,
+			()->new com.jay.codingdojo.carracing.Car("test12"),
+			"자동차 이름은 0~5자만 허용 합니다."
+		);
 	}
 
 

@@ -26,6 +26,12 @@ public class CarRacing {
 		});
 	}
 
+	public String getCurrentPositionOfAllCars() {
+		return cars.stream()
+			.map(Car::showPosition)
+			.collect(Collectors.joining("\n"));
+	}
+
 	public String getWinner() {
 		int maxPosition = cars.stream().mapToInt(Car::getPosition).max().getAsInt();
 		return cars.stream()

@@ -1,8 +1,9 @@
 package com.jay.codingdojo.carracing;
 
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +38,11 @@ public class CarRacingTest {
 
 	@Test
 	void carRacingCanShowWinner () throws Exception {
-		sut.getWinner();
+		assertThat(sut.getWinner()).isNotNull();
+	}
+
+	@Test
+	void getCurrentPositionOfAllCars () throws Exception {
+		assertThat(sut.getCurrentPositionOfAllCars()).contains("test1","test2","test3");
 	}
 }

@@ -1,5 +1,6 @@
 package com.jay.codingdojo.carracing;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public class CarRacingTest {
 
 	@Test
-	void canCreatCarRacing () throws Exception {
-		CarRacing carRacing = new CarRacing();
+	void canCreatCarRacingWithCarNames () throws Exception {
+		Assertions.assertDoesNotThrow(() -> new CarRacing("test1","test2"));
 	}
 }

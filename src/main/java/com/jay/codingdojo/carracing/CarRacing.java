@@ -17,4 +17,12 @@ public class CarRacing {
 	public int generateRandomNumber() {
 		return (int) (Math.random() * 10);
 	}
+
+	public void moveCars() {
+		cars.forEach(car -> {
+			if (generateRandomNumber() >= 4) {
+				car.move();
+			}
+		});
+	}
 }

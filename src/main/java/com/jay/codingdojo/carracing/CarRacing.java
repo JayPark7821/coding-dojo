@@ -13,4 +13,8 @@ public class CarRacing {
 				.map(Car::new)
 				.collect(Collectors.toList());
 	}
+
+	public int generateRandomNumber() {
+		return (int) (Math.random() * 10);
+	}
 }

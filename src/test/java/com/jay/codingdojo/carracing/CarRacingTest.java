@@ -1,6 +1,7 @@
 package com.jay.codingdojo.carracing;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,8 +15,16 @@ import org.junit.jupiter.api.Test;
  */
 public class CarRacingTest {
 
+	private CarRacing sut;
+
+	@BeforeEach
+	void setUp() {
+		sut = new CarRacing("test1","test2","test3");
+	}
+
 	@Test
-	void canCreatCarRacingWithCarNames () throws Exception {
-		Assertions.assertDoesNotThrow(() -> new CarRacing("test1","test2"));
+	void carRacingCanGenerateRandomNumber () throws Exception {
+		int randomNumber = sut.generateRandomNumber();
+		Assertions.assertTrue(randomNumber >= 0 && randomNumber <= 9);
 	}
 }

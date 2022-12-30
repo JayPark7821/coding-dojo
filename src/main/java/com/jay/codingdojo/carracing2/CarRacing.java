@@ -20,6 +20,7 @@ public class CarRacing {
 
 	public void countLaps() {
 		lapsCompleted++;
+		cars.forEach(car -> car.move(generateRandomNumber()));
 	}
 
 	public boolean isFinished() {

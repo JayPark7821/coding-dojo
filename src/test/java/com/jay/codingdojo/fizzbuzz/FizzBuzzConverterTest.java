@@ -2,6 +2,8 @@ package com.jay.codingdojo.fizzbuzz;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.stream.IntStream;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,5 +55,14 @@ public class FizzBuzzConverterTest {
 	void fizzBuzzConverterCanConvertMultiplesOfThreeAndFiveToFizzBuzz() {
 		assertThat(sut.convert(15)).isEqualTo("FizzBuzz");
 	}
+
+	@Test
+	void fizzBuzzConverterSholudReturnsGivenNumber() {
+		IntStream.range(0, 100)
+			.filter(i -> i % 3 != 0 && i % 5 != 0)
+			.forEach(i -> assertThat(sut.convert(i)).isEqualTo(String.valueOf(i)));
+	}
+
+
 
 }

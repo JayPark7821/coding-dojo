@@ -34,4 +34,9 @@ public class CarRacingTest {
 	void carRacingCanMakeCarToMove () throws Exception {
 		assertDoesNotThrow(()->sut.moveCars());
 	}
+
+	@Test
+	void carRacingCanShowWinner () throws Exception {
+		sut.getWinner();
+	}
 }

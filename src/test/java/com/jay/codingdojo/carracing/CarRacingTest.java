@@ -1,5 +1,7 @@
 package com.jay.codingdojo.carracing;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * 기능 요구사항
  *
@@ -11,4 +13,8 @@ package com.jay.codingdojo.carracing;
  */
 public class CarRacingTest {
 
+	@Test
+	void canCreatCarRacing () throws Exception {
+		CarRacing carRacing = new CarRacing();
+	}
 }

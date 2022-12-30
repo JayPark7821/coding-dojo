@@ -1,5 +1,7 @@
 package com.jay.codingdojo.carracing2;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,12 +23,24 @@ public class ResultViewTest {
 	@Test
 	void resultViewCanPrintCurrentPositionsOfAllCars() throws Exception {
 		String currentPositions = sut.printCurrentPositions(cars);
-		Assertions.assertThat(currentPositions)
+		assertThat(currentPositions)
 			.contains(
 				cars.stream()
 					.map(car-> car.getName() + " : ")
 					.collect(Collectors.toList())
 			);
+	}
+
+	@Test
+	void resultViewCanPrintWinnter() throws Exception {
+		Car winner = cars.get(0);
+		winner.move(5);
+
+		String winners = sut.printWinner(cars);
+
+		assertThat(winners)
+			.contains(winner.getName());
+
 	}
 
 }

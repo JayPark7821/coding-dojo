@@ -12,5 +12,7 @@ public class CarRacing {
 		this.laps = laps;
 	}
 
-
+	public int generateRandomNumber() {
+		return (int) (Math.random() * 10);
+	}
 }

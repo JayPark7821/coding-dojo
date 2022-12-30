@@ -1,15 +1,27 @@
 package com.jay.codingdojo.carracing2;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CarRacingTest {
 
+	private CarRacing sut;
 	private final List<Car> cars = List.of(new Car("test1"), new Car("test2"), new Car("test3"));
 
-	@Test
-	void canCreateCarRacing() throws Exception {
-		CarRacing sut = new CarRacing(cars, 5);
+	@BeforeEach
+	void setUp() {
+		sut = new CarRacing(cars, 3);
 	}
+
+	@Test
+	void carRacingCanGenerateRandomNumber () throws Exception {
+		int randomNumber = sut.generateRandomNumber();
+		assertTrue(randomNumber >= 0 && randomNumber <= 9);
+	}
+
+
 }

@@ -7,10 +7,10 @@ import java.util.Random;
 public class RandomNumberServiceImpl implements RandomNumberService {
 
 	@Override
-	public int generateRandomNumber() {
-		return randomDigitListGenerator().stream()
+	public String generateRandomNumber() {
+		return Integer.toString(randomDigitListGenerator().stream()
 			.mapToInt(Integer::intValue)
-			.reduce(0, (a, b) -> a * 10 + b);
+			.reduce(0, (a, b) -> a * 10 + b));
 
 	}
 

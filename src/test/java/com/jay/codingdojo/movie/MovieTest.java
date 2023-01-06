@@ -18,4 +18,10 @@ public class MovieTest {
 	void shouldReturn0WhenThereIsNoRating () throws Exception {
 		assertThat(sut.getRating()).isEqualTo(0);
 	}
+	
+	@Test
+	void shouldReturn4WhenOnceRatedAs4 () throws Exception {
+		sut.rate(4);
+		assertThat(sut.getRating()).isEqualTo(4);
+	}
 }

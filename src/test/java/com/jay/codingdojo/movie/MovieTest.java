@@ -24,4 +24,11 @@ public class MovieTest {
 		sut.rate(4);
 		assertThat(sut.getRating()).isEqualTo(4);
 	}
+
+	@Test
+	void shouldReturnAverageRatingWhenRatedMoreThenTwoTimes() throws Exception {
+		sut.rate(4);
+		sut.rate(2);
+		assertThat(sut.getRating()).isEqualTo(3);
+	}
 }

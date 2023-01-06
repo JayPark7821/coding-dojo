@@ -7,35 +7,36 @@ import java.util.regex.Pattern;
 
 public class BaseBall {
 
-	private final String randomNumber;
+	private final List<String> randomNumber;
 	private final RandomNumberService service;
 
 	private static final Pattern pattern = Pattern.compile("^[0-9]{3}$");
 
 	BaseBall(RandomNumberService service) {
 		this.service = service;
-		this.randomNumber = service.generateRandomNumber();
+		this.randomNumber = convertIntToStringList(service.generateRandomNumber());
 	}
 
 	public static BaseBall startBaseBallGame() {
 		return new BaseBall(new RandomNumberServiceImpl());
 	}
 
-
 	public BallCount countBall(String userInput) {
-
 		validateUserInput(userInput);
+		return createAndCountBalls(userInput);
+	}
+
+	private BallCount createAndCountBalls(String userInput) {
 
 		BallCount ballCount = new BallCount();
 		List<String> userInputDigits = convertIntToStringList(userInput);
-		List<String> randomNumberDigits = convertIntToStringList(randomNumber);
 
 		userInputDigits.stream()
 			.forEach(digit -> {
-				if (randomNumberDigits.indexOf(digit) == userInputDigits.indexOf(digit)) {
+				if (isStrike(userInputDigits, digit)) {
 					ballCount.countStrike();
 
-				} else if(randomNumberDigits.contains(digit)){
+				} else if(randomNumber.contains(digit)){
 					ballCount.countBall();
 				}
 			});
@@ -43,7 +44,11 @@ public class BaseBall {
 		return ballCount;
 	}
 
-	private static void validateUserInput(String userInput) {
+	private boolean isStrike(List<String> userInputDigits, String digit) {
+		return randomNumber.indexOf(digit) == userInputDigits.indexOf(digit);
+	}
+
+	private void validateUserInput(String userInput) {
 
 		if(!pattern.matcher(userInput).matches()) {
 			throw new IllegalArgumentException("3자리 숫자만 입력 가능합니다.");

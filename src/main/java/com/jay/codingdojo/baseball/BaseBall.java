@@ -1,42 +1,24 @@
 package com.jay.codingdojo.baseball;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.IntStream;
-
 public class BaseBall {
 
 	private final int randomNumber;
+	private final RandomNumberService service;
 
-	private BaseBall() {
-		this.randomNumber = generateRandomNumber();
+	private BaseBall(RandomNumberService service) {
+		this.service = service;
+		this.randomNumber = service.generateRandomNumber();
 	}
 
 	public static BaseBall startBaseBallGame() {
-		return new BaseBall();
+		return new BaseBall(new RandomNumberServiceImpl());
 	}
 
-	int generateRandomNumber() {
-		return randomDigitListGenerator().stream()
-				.mapToInt(Integer::intValue)
-				.reduce(0, (a, b) -> a * 10 + b);
-
+	BaseBall startBaseBallForTest(RandomNumberService service) {
+		return new BaseBall(service);
 	}
 
-	private List<Integer> randomDigitListGenerator() {
-		List<Integer> randomDigitList = new ArrayList<>();
-
-		while(randomDigitList.size() < 3) {
-			int randomDigit = new Random().nextInt(9) + 1;
-			if (!randomDigitList.contains(randomDigit)) {
-				randomDigitList.add(randomDigit);
-			}
-		}
-		return randomDigitList;
-	}
-
-	public BallCount countBall(int i) {
+	public BallCount countBall(int userInput) {
 		return new BallCount(0, 0);
 	}
 }

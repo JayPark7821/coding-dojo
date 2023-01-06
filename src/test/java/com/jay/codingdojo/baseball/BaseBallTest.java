@@ -13,7 +13,13 @@ public class BaseBallTest {
 
 	@BeforeEach
 	void setUp() {
-		sut = BaseBall.startBaseBallGame();
+		sut = new BaseBall(new RandomNumberService() {
+			@Override
+			public int generateRandomNumber() {
+				return 789;
+			}
+		});
+
 	}
 
 
@@ -25,12 +31,19 @@ public class BaseBallTest {
 
 	@Test
 	void ifThereAreNoMatchingNumbersThenReturnNothing() throws Exception {
-		assertThat(sut.countBall(123)).isEqualTo(new BallCount(0,0));
+		BallCount ballCount = sut.countBall(123);
+		assertBallCounts(ballCount, 0,0);
 	}
 
 	@Test
 	void ifOneNumberMatchesThenReturnOneBall() throws Exception {
-		assertThat(sut.countBall(123)).isEqualTo(new BallCount(1,0));
+		BallCount ballCount = sut.countBall(923);
+		assertBallCounts(ballCount, 1,0);
+	}
+
+	private static void assertBallCounts(BallCount ballCount, int balls, int strikes) {
+		assertThat(ballCount.getBalls()).isEqualTo(balls);
+		assertThat(ballCount.getStrikes()).isEqualTo(strikes);
 	}
 
 

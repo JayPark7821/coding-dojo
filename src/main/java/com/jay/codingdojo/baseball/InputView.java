@@ -7,14 +7,13 @@ import com.jay.codingdojo.carracing2.UserInput;
 
 public class InputView {
 
-	public int getUserInput() {
+	public String getUserInput() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("숫자를 입력해 주세요: ");
-		String userInput = sc.nextLine();
-		return Integer.parseInt(userInput);
+		return sc.nextLine();
 	}
 
-	public int shouldContinue() {
+	public String shouldContinue() {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
@@ -22,7 +21,7 @@ public class InputView {
 			if (!List.of("1", "2").contains(userInput))
 				continue;
 
-			return Integer.parseInt(userInput);
+			return userInput;
 		}
 	}
 }

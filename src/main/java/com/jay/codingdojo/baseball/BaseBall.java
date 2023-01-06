@@ -18,6 +18,13 @@ public class BaseBall {
 	}
 
 	int generateRandomNumber() {
+		return randomDigitListGenerator().stream()
+				.mapToInt(Integer::intValue)
+				.reduce(0, (a, b) -> a * 10 + b);
+
+	}
+
+	private List<Integer> randomDigitListGenerator() {
 		List<Integer> randomDigitList = new ArrayList<>();
 
 		while(randomDigitList.size() < 3) {
@@ -26,11 +33,7 @@ public class BaseBall {
 				randomDigitList.add(randomDigit);
 			}
 		}
-
-		return IntStream.range(0, randomDigitList.size())
-			.map(i -> randomDigitList.get(i) * (int)Math.pow(10, i))
-			.sum();
-
+		return randomDigitList;
 	}
 
 }

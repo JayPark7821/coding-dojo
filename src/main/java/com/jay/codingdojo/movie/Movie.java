@@ -7,4 +7,8 @@ public class Movie {
 	public Movie(String title) {
 		this.title = title;
 	}
+
+	public int getRating() {
+		throw new UnsupportedOperationException("com.jay.codingdojo.movie.Movie.getRating())");
+	}
 }

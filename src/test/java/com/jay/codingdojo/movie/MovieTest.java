@@ -6,6 +6,6 @@ public class MovieTest {
 
 	@Test
 	void canCreateMovie () throws Exception {
-		new Movie();
+		new Movie("영화1");
 	}
 }

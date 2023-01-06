@@ -9,18 +9,18 @@ import org.junit.jupiter.api.Test;
 
 public class BaseBallTest {
 
+	private BaseBall sut;
+
+	@BeforeEach
+	void setUp() {
+		sut = BaseBall.startBaseBallGame();
+	}
 
 	@Test
-	void canCreateBaseBall () throws Exception {
-		assertThat(new BaseBall()).isNotNull();
-	}
-	
-	@Test
 	void baseBallCanGenerateRandomNumber () throws Exception {
-		BaseBall baseBall = new BaseBall();
 		IntStream.range(0,100)
 				.forEach(
-					i -> assertThat(baseBall.generateRandomNumber()).isBetween(99, 1000)
+					i -> assertThat(sut.generateRandomNumber()).isBetween(99, 1000)
 				);
 	}
 }

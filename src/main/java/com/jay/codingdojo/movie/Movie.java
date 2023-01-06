@@ -3,12 +3,14 @@ package com.jay.codingdojo.movie;
 public class Movie {
 
 	private final String title;
+	private int rating;
 
 	public Movie(String title) {
 		this.title = title;
+		this.rating = 0;
 	}
 
 	public int getRating() {
-		throw new UnsupportedOperationException("com.jay.codingdojo.movie.Movie.getRating())");
+		return this.rating;
 	}
 }

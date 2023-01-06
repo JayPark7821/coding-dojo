@@ -2,6 +2,8 @@ package com.jay.codingdojo.baseball;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.stream.IntStream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,9 @@ public class BaseBallTest {
 	@Test
 	void baseBallCanGenerateRandomNumber () throws Exception {
 		BaseBall baseBall = new BaseBall();
-		assertThat(baseBall.generateRandomNumber()).isGreaterThan(99);
-		assertThat(baseBall.generateRandomNumber()).isLessThan(1000);
+		IntStream.range(0,100)
+				.forEach(
+					i -> assertThat(baseBall.generateRandomNumber()).isBetween(99, 1000)
+				);
 	}
 }

@@ -17,5 +17,6 @@ public class BaseBallTest {
 	void baseBallCanGenerateRandomNumber () throws Exception {
 		BaseBall baseBall = new BaseBall();
 		assertThat(baseBall.generateRandomNumber()).isGreaterThan(99);
+		assertThat(baseBall.generateRandomNumber()).isLessThan(1000);
 	}
 }

@@ -14,7 +14,7 @@ public class Movie {
 		return this.rating;
 	}
 
-	public void rate(int i) {
-		throw new UnsupportedOperationException("com.jay.codingdojo.movie.Movie.rate())");
+	public void rate(int rating) {
+		this.rating = rating;
 	}
 }

@@ -36,4 +36,7 @@ public class BaseBall {
 		return randomDigitList;
 	}
 
+	public Object countBall(int i) {
+		throw new UnsupportedOperationException("com.jay.codingdojo.baseball.BaseBall.countBall()");
+	}
 }

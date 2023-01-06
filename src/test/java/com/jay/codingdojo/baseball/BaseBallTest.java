@@ -34,6 +34,11 @@ public class BaseBallTest {
 				);
 	}
 
+	@Test
+	void baseBallCanCountBallFromUserInput() throws Exception {
+		assertThat(sut.countBall(123)).isNotNull();
+	}
+
 	private void checkIfThereIsARepetition(int randomNumber) {
 		String randomNumberString = String.valueOf(randomNumber);
 

@@ -1,7 +1,6 @@
 package com.jay.codingdojo.baseball;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BaseBall {
@@ -21,6 +20,8 @@ public class BaseBall {
 
 	public BallCount countBall(int userInput) {
 
+		validateUserInput(userInput);
+
 		BallCount ballCount = new BallCount();
 		List<String> userInputDigits = convertIntToStringList(userInput);
 		List<String> randomNumberDigits = convertIntToStringList(randomNumber);
@@ -36,6 +37,12 @@ public class BaseBall {
 			});
 
 		return ballCount;
+	}
+
+	private static void validateUserInput(int userInput) {
+		if(userInput < 100 || userInput > 999) {
+			throw new IllegalArgumentException("3자리 숫자만 입력 가능합니다.");
+		}
 	}
 
 	private List<String> convertIntToStringList(int userInput) {

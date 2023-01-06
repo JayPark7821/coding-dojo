@@ -19,10 +19,7 @@ public class BaseBallTest {
 				return 789;
 			}
 		});
-
 	}
-
-
 
 	@Test
 	void baseBallCanCountBallFromUserInput() throws Exception {
@@ -68,7 +65,11 @@ public class BaseBallTest {
 		assertBallCounts(ballCount, 0,3);
 	}
 
-
+	@Test
+	void userShouldInputThreeDigits() throws Exception {
+		assertThatThrownBy(() -> sut.countBall(12)).isExactlyInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> sut.countBall(4312)).isExactlyInstanceOf(IllegalArgumentException.class);
+	}
 
 	private static void assertBallCounts(BallCount ballCount, int balls, int strikes) {
 		assertThat(ballCount.getBalls()).isEqualTo(balls);

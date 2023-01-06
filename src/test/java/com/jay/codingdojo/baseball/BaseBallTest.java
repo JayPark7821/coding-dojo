@@ -41,6 +41,35 @@ public class BaseBallTest {
 		assertBallCounts(ballCount, 1,0);
 	}
 
+	@Test
+	void ifOneNumberMatchesAndSamePositionThenReturnOneStrike() throws Exception {
+		BallCount ballCount = sut.countBall(239);
+		assertBallCounts(ballCount, 0,1);
+	}
+
+
+	@Test
+	void twoStrike() throws Exception {
+		BallCount ballCount = sut.countBall(739);
+		assertBallCounts(ballCount, 0,2);
+	}
+
+
+	@Test
+	void oneBallOneStrike() throws Exception {
+		BallCount ballCount = sut.countBall(379);
+		assertBallCounts(ballCount, 1,1);
+	}
+
+
+	@Test
+	void threeStrikes() throws Exception {
+		BallCount ballCount = sut.countBall(789);
+		assertBallCounts(ballCount, 0,3);
+	}
+
+
+
 	private static void assertBallCounts(BallCount ballCount, int balls, int strikes) {
 		assertThat(ballCount.getBalls()).isEqualTo(balls);
 		assertThat(ballCount.getStrikes()).isEqualTo(strikes);

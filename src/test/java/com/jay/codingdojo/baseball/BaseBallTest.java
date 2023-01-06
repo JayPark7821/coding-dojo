@@ -23,4 +23,26 @@ public class BaseBallTest {
 					i -> assertThat(sut.generateRandomNumber()).isBetween(99, 1000)
 				);
 	}
+
+	@Test
+	void baseBallCanGenerateRandomNumberWithNoRepetition () throws Exception {
+		IntStream.range(0,100)
+				.forEach(
+					i -> {
+						checkIfThereIsARepetition(sut.generateRandomNumber());
+					}
+				);
+	}
+
+	private void checkIfThereIsARepetition(int randomNumber) {
+		String randomNumberString = String.valueOf(randomNumber);
+
+		IntStream.range(0,randomNumberString.length())
+				.forEach(
+					i -> {
+						char digit = randomNumberString.charAt(i);
+						assertThat(randomNumberString.indexOf(digit)).isEqualTo(randomNumberString.lastIndexOf(digit));
+					}
+				);
+	}
 }

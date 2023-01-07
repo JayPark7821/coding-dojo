@@ -4,6 +4,8 @@ import static com.jay.codingdojo.atdd.tennis.application.PlayerType.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,5 +34,14 @@ class TennisGameServiceTest {
 		given(repository.save(any(TennisGame.class))).willReturn(new TennisGame(1L));
 		assertThat(sut.create())
 			.isEqualTo(new TennisGameStatusResponse(1L, 0, 0, "STARTED"));
+	}
+
+	@Test
+	void scores_when_game_not_found() {
+		given(repository.findById(anyLong())).willReturn(Optional.empty());
+
+		assertThatThrownBy(() -> sut.scores(new TennisPlayerScoresRequest(100L, SERVER)))
+			.isExactlyInstanceOf(TennisGameNotFoundException.class)
+			.hasMessage("Tennis game not found: %d".formatted(100L));
 	}
 }

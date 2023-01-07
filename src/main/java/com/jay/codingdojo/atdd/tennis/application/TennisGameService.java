@@ -23,6 +23,7 @@ public class TennisGameService {
 	}
 
 	public TennisGameStatusResponse scores(TennisPlayerScoresRequest request) {
+		repository.findById(request.gameId()).orElseThrow(() -> new TennisGameNotFoundException(request.gameId()));
 		throw new UnsupportedOperationException(
 			"com.jay.codingdojo.atdd.tennis.application.TennisGameService.scores()");
 	}

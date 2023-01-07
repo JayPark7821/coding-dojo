@@ -1,19 +1,29 @@
 package com.jay.codingdojo.atdd.tennis.domain;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class TennisGame {
+
+	private Long id;
+
+	public TennisGame(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
-		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.tennis.domain.TennisGame.getId()");
+		return this.id;
 	}
 
 	public Integer getServerPoints() {
-		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.tennis.domain.TennisGame.getServerPoints()");
+		return 0;
 	}
 
 	public Integer getReceiverPoints() {
-		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.tennis.domain.TennisGame.getReceiverPoints()");
+		return 0;
 	}
 
 	public String getStatus() {
-		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.tennis.domain.TennisGame.getStatus()");
+		return "STARTED";
 	}
 }

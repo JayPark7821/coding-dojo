@@ -1,4 +1,4 @@
-package com.jay.codingdojo.atdd.tennis;
+package com.jay.codingdojo.atdd.tennis.web;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,8 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.path.json.JsonPath;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+
+import com.jay.codingdojo.atdd.tennis.web.TennisGameController;
 
 public class TennisGameControllerAcceptanceTest {
 

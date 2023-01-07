@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jay.codingdojo.atdd.tennis.application.PlayerType;
 import com.jay.codingdojo.atdd.tennis.application.TennisGameService;
+import com.jay.codingdojo.atdd.tennis.application.TennisPlayerScoresRequest;
 import com.jay.codingdojo.atdd.tennis.service.TennisGameStatusResponse;
 
 @RestController
@@ -23,14 +25,14 @@ class TennisGameController {
 		return service.create();
 	}
 
-	@PutMapping("/{id}/score/server")
-	TennisGameStatusResponse serverScores(){
-		throw new UnsupportedOperationException("unimplemented");
+	@PutMapping("/{gameId}/score/server")
+	TennisGameStatusResponse serverScores(final Long gameId){
+		return service.scores(new TennisPlayerScoresRequest(gameId, PlayerType.SERVER ));
 	}
 
-	@PutMapping("/{id}/score/receiver")
-	TennisGameStatusResponse receiverScores(){
-		throw new UnsupportedOperationException("unimplemented");
+	@PutMapping("/{gameId}/score/receiver")
+	TennisGameStatusResponse receiverScores(final Long gameId){
+		return service.scores(new TennisPlayerScoresRequest(gameId, PlayerType.RECEIVER ));
 	}
 }
 

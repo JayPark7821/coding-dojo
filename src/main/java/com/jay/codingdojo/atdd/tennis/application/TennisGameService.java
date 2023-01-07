@@ -13,4 +13,9 @@ public class TennisGameService {
 		throw new UnsupportedOperationException(
 			"com.jay.codingdojo.atdd.tennis.application.TennisGameService.create()");
 	}
+
+	public TennisGameStatusResponse scores(TennisPlayerScoresRequest request) {
+		throw new UnsupportedOperationException(
+			"com.jay.codingdojo.atdd.tennis.application.TennisGameService.scores()");
+	}
 }

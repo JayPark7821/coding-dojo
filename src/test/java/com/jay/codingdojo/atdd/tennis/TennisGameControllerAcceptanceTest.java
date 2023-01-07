@@ -14,7 +14,7 @@ public class TennisGameControllerAcceptanceTest {
 
 	@BeforeEach
 	void setUp() {
-		RestAssuredMockMvc.standaloneSetup();
+		RestAssuredMockMvc.standaloneSetup(new TennisGameController());
 	}
 
 	@Test

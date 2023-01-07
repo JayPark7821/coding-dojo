@@ -10,8 +10,7 @@ import com.jay.codingdojo.atdd.tennis.service.TennisGameStatusResponse;
 public class TennisGameService {
 
 	public TennisGameStatusResponse create() {
-		throw new UnsupportedOperationException(
-			"com.jay.codingdojo.atdd.tennis.application.TennisGameService.create()");
+		return new TennisGameStatusResponse();
 	}
 
 	public TennisGameStatusResponse scores(TennisPlayerScoresRequest request) {

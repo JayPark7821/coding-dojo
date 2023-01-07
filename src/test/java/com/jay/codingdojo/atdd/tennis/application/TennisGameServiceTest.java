@@ -20,7 +20,7 @@ class TennisGameServiceTest {
 	@Test
 	void create() {
 		assertThat(sut.create())
-			.isEqualTo(new TennisGameStatusResponse());
+			.isEqualTo(new TennisGameStatusResponse(1L,0,0,"STARTED"));
 	}
 
 

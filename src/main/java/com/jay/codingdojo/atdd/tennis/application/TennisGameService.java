@@ -10,7 +10,7 @@ import com.jay.codingdojo.atdd.tennis.service.TennisGameStatusResponse;
 public class TennisGameService {
 
 	public TennisGameStatusResponse create() {
-		return new TennisGameStatusResponse();
+		return new TennisGameStatusResponse(1L, 0, 0, "STARTED");
 	}
 
 	public TennisGameStatusResponse scores(TennisPlayerScoresRequest request) {

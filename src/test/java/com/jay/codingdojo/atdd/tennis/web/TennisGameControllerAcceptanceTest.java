@@ -2,25 +2,31 @@ package com.jay.codingdojo.atdd.tennis.web;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.path.json.JsonPath;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.jay.codingdojo.atdd.tennis.web.TennisGameController;
-
+// 모든 컨트롤러가 연결된 시점에 springboottest로 전환
+// 프로젝트가 무겁다면 조금 타협을...
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TennisGameControllerAcceptanceTest {
+
+	@LocalServerPort
+	private int port;
 
 	@BeforeEach
 	void setUp() {
-		RestAssuredMockMvc.standaloneSetup(new TennisGameController());
+		RestAssured.port = port; // 테스트 격리를 위해
 	}
 
 	@Test
 	void create() {
-		final JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
 			.contentType(ContentType.JSON).
@@ -38,7 +44,7 @@ public class TennisGameControllerAcceptanceTest {
 
 	@Test
 	void serverScores() {
-		final JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
 			.contentType(ContentType.JSON).
@@ -55,7 +61,7 @@ public class TennisGameControllerAcceptanceTest {
 
 	@Test
 	void receiverScores() {
-		final JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
 			.contentType(ContentType.JSON).

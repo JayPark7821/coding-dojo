@@ -25,13 +25,14 @@ class BallCountTest {
 		"789, 0, 3"
 	})
 	void testCases(String userInput, int balls, int strikes) throws Exception {
-		BallCount ballCount = sut.countBall(userInput);
-		assertBallCounts(ballCount, balls, strikes);
+		sut.countBall(userInput);
+		assertBallCounts(balls, strikes);
 	}
 
-	private static void assertBallCounts(BallCount ballCount, int balls, int strikes) {
-		assertThat(ballCount.getBalls()).isEqualTo(balls);
-		assertThat(ballCount.getStrikes()).isEqualTo(strikes);
+	private void assertBallCounts(int balls, int strikes) {
+
+		assertThat(sut.getBalls()).isEqualTo(balls);
+		assertThat(sut.getStrikes()).isEqualTo(strikes);
 	}
 
 }

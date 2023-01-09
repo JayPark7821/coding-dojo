@@ -9,11 +9,9 @@ public class App {
 		InputView inputView = new InputView();
 		OutPutView outPutView = new OutPutView();
 
-		while (true) {
+		do {
 			playBaseBallGame(inputView, outPutView);
-			if(!inputView.shouldContinue().equals(GAME_START))
-				break;
-		}
+		} while (inputView.shouldContinue().equals(GAME_START));
 
 	}
 

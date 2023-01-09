@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class RandomNumberServiceImplTest {
 
 	private RandomNumberServiceImpl sut;
-	private static final Pattern pattern = Pattern.compile("^[0-9]{3}$");
+	private static final Pattern pattern = Pattern.compile("^[1-9]{3}$");
 
 	@BeforeEach
 	void setUp() {

@@ -2,15 +2,18 @@ package com.jay.codingdojo.baseball;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.jay.codingdojo.carracing2.UserInput;
 
 public class InputView {
 
+	public static final Pattern pattern = Pattern.compile("^[1-9]{3}$");
+
 	public String getUserInput() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("숫자를 입력해 주세요: ");
-		return sc.nextLine();
+		return validateUserInput(sc.nextLine());
 	}
 
 	public String shouldContinue() {
@@ -23,5 +26,13 @@ public class InputView {
 
 			return userInput;
 		}
+	}
+
+	private String validateUserInput(String userInput) {
+
+		if(!pattern.matcher(userInput).matches()) {
+			throw new IllegalArgumentException("3자리 숫자만 입력 가능합니다.");
+		}
+		return userInput;
 	}
 }

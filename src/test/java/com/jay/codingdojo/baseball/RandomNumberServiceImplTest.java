@@ -19,15 +19,11 @@ class RandomNumberServiceImplTest {
 		sut = new RandomNumberServiceImpl();
 	}
 
-
-	@Test
-	void baseBallCanGenerateRandomNumber () throws Exception {
-		IntStream.range(0,100)
-			.forEach(i -> assertThat(pattern.matcher(sut.generateRandomNumber()).matches()).isTrue());
-	}
-
 	@Test
 	void baseBallCanGenerateRandomNumberWithNoRepetition () throws Exception {
+		IntStream.range(0,100)
+			.forEach(i -> assertThat(pattern.matcher(sut.generateRandomNumber()).matches()).isTrue());
+
 		IntStream.range(0,100)
 			.forEach(i -> checkIfThereIsARepetition(sut.generateRandomNumber()));
 	}

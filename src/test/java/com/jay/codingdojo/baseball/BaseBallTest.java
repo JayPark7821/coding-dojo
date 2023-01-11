@@ -10,11 +10,10 @@ import org.junit.jupiter.api.Test;
 public class BaseBallTest {
 
 	private BaseBall sut;
-	private final RandomNumberService service = new RandomNumberServiceImpl();
 
 	@BeforeEach
 	void setUp() {
-		sut = new BaseBall(service);
+		sut = new BaseBall(new RandomNumberServiceImpl());
 	}
 
 	@Test

@@ -14,4 +14,8 @@ public class CarRacingService {
 	public RaceStatusResponse addCars(Long raceId, String carNames) {
 		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.addCars()");
 	}
+
+	public RaceStatusResponse startRace(long raceId) {
+		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.startRace()");
+	}
 }

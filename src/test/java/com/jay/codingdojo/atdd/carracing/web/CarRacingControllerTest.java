@@ -67,9 +67,12 @@ class CarRacingControllerTest {
 	@Test
 	void getRaceWinner() {
 
+		given(carRacingService.getRaceWinner())
+			.willReturn(new RaceStatusResponse(1L, null, List.of("test1"), null));
+
 		RaceStatusResponse response = sut.getRaceWinner(1L);
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, List.of("test1"), "Race Started"));
+		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, List.of("test1"), null));
 	}
 
 

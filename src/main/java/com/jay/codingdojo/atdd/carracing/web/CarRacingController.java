@@ -36,7 +36,7 @@ public class CarRacingController {
 
 	@GetMapping("/{raceId}/winner")
 	RaceStatusResponse getRaceWinner(@PathVariable("raceId") final Long raceId) {
-		throw new UnsupportedOperationException("unimplemented");
+		return carRacingService.getRaceWinner(1L);
 	}
 
 	@GetMapping("/{raceId}/history")

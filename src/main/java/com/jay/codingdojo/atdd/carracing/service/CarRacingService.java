@@ -15,11 +15,11 @@ public class CarRacingService {
 		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.addCars()");
 	}
 
-	public RaceStatusResponse startRace(long raceId) {
+	public RaceStatusResponse startRace(Long raceId) {
 		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.startRace()");
 	}
 
-	public RaceStatusResponse getRaceWinner() {
+	public RaceStatusResponse getRaceWinner(Long raceId) {
 		throw new UnsupportedOperationException(
 			"com.jay.codingdojo.atdd.carracing.service.CarRacingService.getRaceWinner()");
 	}

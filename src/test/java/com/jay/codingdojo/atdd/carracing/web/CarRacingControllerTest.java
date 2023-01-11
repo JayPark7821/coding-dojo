@@ -67,7 +67,7 @@ class CarRacingControllerTest {
 	@Test
 	void getRaceWinner() {
 
-		given(carRacingService.getRaceWinner())
+		given(carRacingService.getRaceWinner(1L))
 			.willReturn(new RaceStatusResponse(1L, null, List.of("test1"), null));
 
 		RaceStatusResponse response = sut.getRaceWinner(1L);

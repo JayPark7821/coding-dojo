@@ -41,6 +41,8 @@ import io.restassured.path.json.JsonPath;
  */
 public class CarRacingControllerAcceptanceTest {
 
+	private static final int totalLapCount = 5;
+
 	@BeforeEach
 	void setUp() throws Exception {
 		RestAssuredMockMvc.standaloneSetup();
@@ -49,10 +51,15 @@ public class CarRacingControllerAcceptanceTest {
 	@Test
 	@DisplayName("레이싱 게임을 생성한다.")
 	void create() throws Exception {
+
+		JSONObject lapCount = new JSONObject();
+		lapCount.put("totalLapCount", totalLapCount);
+
 		final JsonPath response = RestAssuredMockMvc.
 
 			given()
-			.contentType("application/json").
+			.contentType("application/json")
+			.body(lapCount).
 
 			when()
 			.post("/api/jay/car-racing").
@@ -125,12 +132,22 @@ public class CarRacingControllerAcceptanceTest {
 		assertThat(response.getString("winner")).containsAnyOf("test1", "test2", "test3");
 	}
 
+	@Test
+	void getRaceHistory () throws Exception {
 
+		JsonPath response = RestAssuredMockMvc.
 
+			given()
+			.contentType("application/json").
 
+			when()
+			.get("/api/jay/car-racing/1/history").
 
+			then()
+			.statusCode(200)
+			.extract().jsonPath();
 
+		assertThat(response.getList("history", String.class).size()).isEqualTo(totalLapCount);
 
-
-
+	}
 }

@@ -79,6 +79,31 @@ class CarRacingControllerTest {
 	@Test
 	void getRaceHistory() {
 
+		given(carRacingService.getRaceHistory(1L))
+			.willReturn(new RaceStatusResponse(
+				1L,
+				List.of(
+					Map.of(
+						"test1",1,
+						"test2",0,
+						"test3",1
+					),
+					Map.of(
+						"test1",2,
+						"test2",0,
+						"test3",1
+					),
+					Map.of(
+						"test1",2,
+						"test2",1,
+						"test3",1
+					)
+				),
+				null,
+				null
+				)
+			);
+
 		RaceStatusResponse response = sut.getRaceHistory(1L);
 
 		assertThat(response).isEqualTo(

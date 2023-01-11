@@ -41,6 +41,7 @@ public class CarRacingController {
 
 	@GetMapping("/{raceId}/history")
 	RaceStatusResponse getRaceHistory(@PathVariable("raceId") final Long raceId) {
-		throw new UnsupportedOperationException("unimplemented");
+		return carRacingService.getRaceHistory(raceId);
 	}
+
 }

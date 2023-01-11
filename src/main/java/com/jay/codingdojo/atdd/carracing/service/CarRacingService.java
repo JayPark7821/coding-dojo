@@ -23,4 +23,9 @@ public class CarRacingService {
 		throw new UnsupportedOperationException(
 			"com.jay.codingdojo.atdd.carracing.service.CarRacingService.getRaceWinner()");
 	}
+
+	public RaceStatusResponse getRaceHistory(Long raceId) {
+		throw new UnsupportedOperationException(
+			"com.jay.codingdojo.atdd.carracing.service.CarRacingService.getRaceHistory()");
+	}
 }

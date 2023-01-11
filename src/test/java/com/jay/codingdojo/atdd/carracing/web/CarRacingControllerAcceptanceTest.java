@@ -106,6 +106,26 @@ public class CarRacingControllerAcceptanceTest {
 		assertThat(response.getString("message")).isEqualTo("Race Started");
 	}
 
+	@Test
+	@DisplayName("레이싱의 우승자 조회")
+	void getWinner () throws Exception {
+
+		JsonPath response = RestAssuredMockMvc.
+
+			given()
+			.contentType("application/json").
+
+			when()
+			.get("/api/jay/car-racing/1/winner").
+
+			then()
+			.statusCode(200)
+			.extract().jsonPath();
+
+		assertThat(response.getString("winner")).containsAnyOf("test1", "test2", "test3");
+	}
+
+
 
 
 

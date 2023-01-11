@@ -30,7 +30,6 @@ public class BallCount {
 			.forEach(digit -> {
 				if (isStrike(userInput, digit)) {
 					this.strikes++;
-
 				} else if (this.randomNumber.contains(digit)) {
 					this.balls++;
 				}

@@ -19,20 +19,30 @@ class CarRacingControllerTest {
 
 	@Mock
 	private CarRacingService carRacingService;
+	private CarRacingController sut;
 
 	@BeforeEach
 	void setUp() {
+		sut = new CarRacingController(carRacingService);
 		given(carRacingService.create())
-			.willReturn(new RaceStatusResponse(1L, null, null));
+			.willReturn(new RaceStatusResponse(1L, null, null, null));
 	}
 
 	@Test
 	void create() {
-		final CarRacingController sut = new CarRacingController(carRacingService);
-
 		RaceStatusResponse response = sut.create();
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null));
+		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, null));
 	}
+
+
+	@Test
+	void addCars() {
+		RaceStatusResponse response = sut.addCars(1L, "test1,test2,test3");
+
+		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, "3 Cars Participated"));
+	}
+
+
 
 }

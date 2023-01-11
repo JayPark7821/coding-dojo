@@ -49,5 +49,15 @@ class CarRacingControllerTest {
 	}
 
 
+	@Test
+	void startRace() {
+		RaceStatusResponse response = sut.startRace(1L);
+
+		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, "Race Started"));
+	}
+
+
+
+
 
 }

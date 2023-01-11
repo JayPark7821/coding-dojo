@@ -38,6 +38,10 @@ class CarRacingControllerTest {
 
 	@Test
 	void addCars() {
+
+		given(carRacingService.addCars("test1,test2,test3"))
+			.willReturn("3 Cars Participated");
+
 		RaceStatusResponse response = sut.addCars(1L, "test1,test2,test3");
 
 		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, "3 Cars Participated"));

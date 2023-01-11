@@ -10,4 +10,8 @@ public class CarRacingService {
 	public RaceStatusResponse create() {
 		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.create()");
 	}
+
+	public String addCars(String s) {
+		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.addCars()");
+	}
 }

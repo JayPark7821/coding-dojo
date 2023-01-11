@@ -25,7 +25,7 @@ public class CarRacingController {
 	}
 
 	@PostMapping("/{raceId}/car")
-	RaceStatusResponse addCars(@PathVariable("raceId") final Long raceId) {
+	RaceStatusResponse addCars(@PathVariable("raceId") final Long raceId, String carNames) {
 		throw new UnsupportedOperationException("unimplemented");
 	}
 

@@ -24,12 +24,13 @@ class CarRacingControllerTest {
 	@BeforeEach
 	void setUp() {
 		sut = new CarRacingController(carRacingService);
-		given(carRacingService.create())
-			.willReturn(new RaceStatusResponse(1L, null, null, null));
 	}
 
 	@Test
 	void create() {
+		given(carRacingService.create())
+			.willReturn(new RaceStatusResponse(1L, null, null, null));
+
 		RaceStatusResponse response = sut.create();
 
 		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, null));
@@ -39,8 +40,8 @@ class CarRacingControllerTest {
 	@Test
 	void addCars() {
 
-		given(carRacingService.addCars("test1,test2,test3"))
-			.willReturn("3 Cars Participated");
+		given(carRacingService.addCars(1L, "test1,test2,test3"))
+			.willReturn(new RaceStatusResponse(1L, null, null, "3 Cars Participated"));
 
 		RaceStatusResponse response = sut.addCars(1L, "test1,test2,test3");
 

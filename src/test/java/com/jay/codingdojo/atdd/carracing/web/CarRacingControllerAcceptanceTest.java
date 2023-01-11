@@ -8,8 +8,11 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 
 /**
@@ -39,13 +42,16 @@ import io.restassured.path.json.JsonPath;
  * <p>
  * pobi, honux가 최종 우승했습니다.
  */
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CarRacingControllerAcceptanceTest {
 
+	@LocalServerPort
+	private int port;
 	private static final int totalLapCount = 5;
 
 	@BeforeEach
-	void setUp() throws Exception {
-		RestAssuredMockMvc.standaloneSetup();
+	void setUp() {
+		RestAssured.port = port;
 	}
 
 	@Test
@@ -55,10 +61,10 @@ public class CarRacingControllerAcceptanceTest {
 		Map<String, Object> lapCount = new HashMap<>();
 		lapCount.put("totalLapCount", totalLapCount);
 
-		final JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
-			.contentType("application/json")
+			.contentType(ContentType.JSON)
 			.body(lapCount).
 
 			when()
@@ -77,10 +83,10 @@ public class CarRacingControllerAcceptanceTest {
 		Map<String, Object> carNames = new HashMap<>();
 		carNames.put("carNames", "test1,test2,test3");
 
-		final JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
-			.contentType("application/json")
+			.contentType(ContentType.JSON)
 			.body(carNames).
 
 			when()
@@ -97,10 +103,10 @@ public class CarRacingControllerAcceptanceTest {
 	@DisplayName("레이싱 게임을 시작한다.")
 	void startRace() throws Exception {
 
-		final JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
-			.contentType("application/json").
+			.contentType(ContentType.JSON).
 
 			when()
 			.put("/api/jay/car-racing/1/start").
@@ -116,10 +122,10 @@ public class CarRacingControllerAcceptanceTest {
 	@DisplayName("레이싱의 우승자 조회")
 	void getWinner() throws Exception {
 
-		JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
-			.contentType("application/json").
+			.contentType(ContentType.JSON).
 
 			when()
 			.get("/api/jay/car-racing/1/winner").
@@ -135,10 +141,10 @@ public class CarRacingControllerAcceptanceTest {
 	@DisplayName("레이스 이력 조회")
 	void getRaceHistory() throws Exception {
 
-		JsonPath response = RestAssuredMockMvc.
+		final JsonPath response = RestAssured.
 
 			given()
-			.contentType("application/json").
+			.contentType(ContentType.JSON).
 
 			when()
 			.get("/api/jay/car-racing/1/history").

@@ -21,7 +21,7 @@ public class CarRacingController {
 
 	@PostMapping
 	RaceStatusResponse create() {
-		throw new UnsupportedOperationException("unimplemented");
+		return carRacingService.create();
 	}
 
 	@PostMapping("/{raceId}/car")

@@ -6,4 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class CarRacingService {
+
+	public RaceStatusResponse create() {
+		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.create()");
+	}
 }

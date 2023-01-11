@@ -84,8 +84,32 @@ public class CarRacingControllerAcceptanceTest {
 			.statusCode(200)
 			.extract().jsonPath();
 
-		assertThat(response.getString("3 Cars Participated")).isEqualTo("1");
+		assertThat(response.getString("message")).isEqualTo("3 Cars Participated");
 	}
+
+	@Test
+	@DisplayName("레이싱 게임을 시작한다.")
+	void startRace() throws Exception {
+
+		final JsonPath response = RestAssuredMockMvc.
+
+			given()
+			.contentType("application/json").
+
+			when()
+			.put("/api/jay/car-racing/1/start").
+
+			then()
+			.statusCode(200)
+			.extract().jsonPath();
+
+		assertThat(response.getString("message")).isEqualTo("Race Started");
+	}
+
+
+
+
+
 
 
 

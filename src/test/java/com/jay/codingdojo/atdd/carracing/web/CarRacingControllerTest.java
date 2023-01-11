@@ -14,6 +14,8 @@ import com.jay.codingdojo.atdd.carracing.service.RaceStatusResponse;
 
 import static org.mockito.BDDMockito.given;
 
+import java.util.List;
+
 @ExtendWith(MockitoExtension.class)
 class CarRacingControllerTest {
 
@@ -59,6 +61,17 @@ class CarRacingControllerTest {
 
 		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, "Race Started"));
 	}
+
+
+
+	@Test
+	void getRaceWinner() {
+
+		RaceStatusResponse response = sut.getRaceWinner(1L);
+
+		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, List.of("test1"), "Race Started"));
+	}
+
 
 
 

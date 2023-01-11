@@ -24,6 +24,7 @@ class CarRacingControllerTest {
 	private CarRacingService carRacingService;
 	private CarRacingController sut;
 
+
 	@BeforeEach
 	void setUp() {
 		sut = new CarRacingController(carRacingService);
@@ -31,36 +32,48 @@ class CarRacingControllerTest {
 
 	@Test
 	void create() {
+		final Long raceId = 1L;
+		RaceStatusResponse expectedResponse
+			= new RaceStatusResponse(raceId, null, null, null);
+
 		given(carRacingService.create())
-			.willReturn(new RaceStatusResponse(1L, null, null, null));
+			.willReturn(expectedResponse);
 
 		RaceStatusResponse response = sut.create();
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, null));
+		assertThat(response).isEqualTo(expectedResponse);
 	}
 
 
 	@Test
 	void addCars() {
 
-		given(carRacingService.addCars(1L, "test1,test2,test3"))
-			.willReturn(new RaceStatusResponse(1L, null, null, "3 Cars Participated"));
+		final Long raceId = 1L;
+		RaceStatusResponse expectedResponse
+			= new RaceStatusResponse(raceId, null, null, "3 Cars Participated");
 
-		RaceStatusResponse response = sut.addCars(1L, "test1,test2,test3");
+		given(carRacingService.addCars(raceId, "test1,test2,test3"))
+			.willReturn(expectedResponse);
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, "3 Cars Participated"));
+		RaceStatusResponse response = sut.addCars(raceId, "test1,test2,test3");
+
+		assertThat(response).isEqualTo(expectedResponse);
 	}
 
 
 	@Test
 	void startRace() {
 
-		given(carRacingService.startRace(1L))
-			.willReturn(new RaceStatusResponse(1L, null, null, "Race Started"));
+		final Long raceId = 1L;
+		RaceStatusResponse expectedResponse
+			= new RaceStatusResponse(raceId, null, null, "Race Started");
 
-		RaceStatusResponse response = sut.startRace(1L);
+		given(carRacingService.startRace(raceId))
+			.willReturn(expectedResponse);
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, null, "Race Started"));
+		RaceStatusResponse response = sut.startRace(raceId);
+
+		assertThat(response).isEqualTo(expectedResponse);
 	}
 
 
@@ -68,71 +81,54 @@ class CarRacingControllerTest {
 	@Test
 	void getRaceWinner() {
 
-		given(carRacingService.getRaceWinner(1L))
-			.willReturn(new RaceStatusResponse(1L, null, List.of("test1"), null));
+		final Long raceId = 1L;
+		RaceStatusResponse expectedResponse
+			= new RaceStatusResponse(raceId, null, List.of("test1"), null);
 
-		RaceStatusResponse response = sut.getRaceWinner(1L);
+		given(carRacingService.getRaceWinner(raceId))
+			.willReturn(expectedResponse);
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(1L, null, List.of("test1"), null));
+		RaceStatusResponse response = sut.getRaceWinner(raceId);
+
+		assertThat(response).isEqualTo(expectedResponse);
 	}
 
 	@Test
 	void getRaceHistory() {
 
-		given(carRacingService.getRaceHistory(1L))
-			.willReturn(new RaceStatusResponse(
-				1L,
-				List.of(
-					Map.of(
-						"test1",1,
-						"test2",0,
-						"test3",1
-					),
-					Map.of(
-						"test1",2,
-						"test2",0,
-						"test3",1
-					),
-					Map.of(
-						"test1",2,
-						"test2",1,
-						"test3",1
-					)
-				),
-				null,
-				null
-				)
+		final Long raceId = 1L;
+		RaceStatusResponse expectedResponse
+			= new RaceStatusResponse(raceId, generateRaceHistory(), null, null);
+
+		given(carRacingService.getRaceHistory(raceId))
+			.willReturn(expectedResponse
 			);
 
-		RaceStatusResponse response = sut.getRaceHistory(1L);
+		RaceStatusResponse response = sut.getRaceHistory(raceId);
 
 		assertThat(response).isEqualTo(
-			new RaceStatusResponse(
-				1L,
-				List.of(
-					Map.of(
-					"test1",1,
-					"test2",0,
-					"test3",1
-					),
-					Map.of(
-					"test1",2,
-					"test2",0,
-					"test3",1
-					),
-					Map.of(
-					"test1",2,
-					"test2",1,
-					"test3",1
-					)
-				),
-				null,
-				null
-			)
+			expectedResponse
 		);
 	}
 
-
-
+	private List<Map<String, Integer>> generateRaceHistory() {
+		return List.of(
+			Map.of(
+				"test1", 1,
+				"test2", 0,
+				"test3", 1
+			),
+			Map.of(
+				"test1", 2,
+				"test2", 0,
+				"test3", 1
+			),
+			Map.of(
+				"test1", 2,
+				"test2", 1,
+				"test3", 1
+			)
+		);
+	}
 
 }

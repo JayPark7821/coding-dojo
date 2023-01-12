@@ -31,7 +31,7 @@ class CarServiceTest {
 			.willReturn(new Car(1L, "test1"));
 
 		assertThat(sut.create("test1"))
-			.isEqualTo(new CarResponse(1L, "test1"));
+			.isEqualTo(new Car(1L, "test1"));
 	}
 
 	@Test

@@ -13,9 +13,7 @@ public class CarService {
 
 	private final CarRepository repository;
 
-	public CarResponse create(String name) {
-
-		final Car savedCar = repository.save(new Car(name));
-		return new CarResponse(savedCar.getId(), savedCar.getName());
+	Car create(String name) {
+		return repository.save(new Car(name));
 	}
 }

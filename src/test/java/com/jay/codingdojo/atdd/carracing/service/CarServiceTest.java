@@ -34,4 +34,15 @@ class CarServiceTest {
 			.isEqualTo(new CarResponse(1L, "test1"));
 	}
 
+	@Test
+	void create_when_name_is_less_then_1_and_more_then5() throws Exception {
+		assertThatThrownBy(() -> sut.create(""))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Car name must be between 1 and 5 characters");
+
+		assertThatThrownBy(() -> sut.create("test1234567"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Car name must be between 1 and 5 characters");
+	}
+
 }

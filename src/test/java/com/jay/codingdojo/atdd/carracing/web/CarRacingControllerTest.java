@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.jay.codingdojo.atdd.carracing.service.CarRacingService;
+import com.jay.codingdojo.atdd.carracing.service.CarRacingUsecase;
 import com.jay.codingdojo.atdd.carracing.service.RaceStatusResponse;
 
 import static org.mockito.BDDMockito.given;
@@ -22,12 +23,14 @@ class CarRacingControllerTest {
 
 	@Mock
 	private CarRacingService carRacingService;
+	@Mock
+	private CarRacingUsecase carRacingUsecase;
 	private CarRacingController sut;
 
 
 	@BeforeEach
 	void setUp() {
-		sut = new CarRacingController(carRacingService);
+		sut = new CarRacingController(carRacingService,carRacingUsecase);
 	}
 
 	@Test
@@ -52,7 +55,7 @@ class CarRacingControllerTest {
 		RaceStatusResponse expectedResponse
 			= new RaceStatusResponse(raceId, null, null, "3 Cars Participated");
 
-		given(carRacingService.addCars(raceId, "test1,test2,test3"))
+		given(carRacingUsecase.addCars(raceId, "test1,test2,test3"))
 			.willReturn(expectedResponse);
 
 		RaceStatusResponse response = sut.addCars(raceId, "test1,test2,test3");
@@ -101,14 +104,11 @@ class CarRacingControllerTest {
 			= new RaceStatusResponse(raceId, generateRaceHistory(), null, null);
 
 		given(carRacingService.getRaceHistory(raceId))
-			.willReturn(expectedResponse
-			);
+			.willReturn(expectedResponse);
 
 		RaceStatusResponse response = sut.getRaceHistory(raceId);
 
-		assertThat(response).isEqualTo(
-			expectedResponse
-		);
+		assertThat(response).isEqualTo(expectedResponse);
 	}
 
 	private List<Map<String, Integer>> generateRaceHistory() {

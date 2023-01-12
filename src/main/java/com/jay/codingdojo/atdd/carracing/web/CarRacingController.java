@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jay.codingdojo.atdd.carracing.service.CarRacingService;
+import com.jay.codingdojo.atdd.carracing.service.CarRacingUsecase;
 import com.jay.codingdojo.atdd.carracing.service.RaceStatusResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class CarRacingController {
 
 	private final CarRacingService carRacingService;
+	private final CarRacingUsecase carRacingUsecase;
 
 	@PostMapping
 	RaceStatusResponse create() {
@@ -26,7 +28,7 @@ public class CarRacingController {
 
 	@PostMapping("/{raceId}/car")
 	RaceStatusResponse addCars(@PathVariable("raceId") final Long raceId, String carNames) {
-		return carRacingService.addCars(raceId, carNames);
+		return carRacingUsecase.addCars(raceId, carNames);
 	}
 
 	@PutMapping("/{raceId}/start")

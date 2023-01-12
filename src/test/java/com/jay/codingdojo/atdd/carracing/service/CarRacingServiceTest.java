@@ -3,6 +3,10 @@ package com.jay.codingdojo.atdd.carracing.service;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.jay.codingdojo.atdd.carracing.domain.Car;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
 
@@ -45,7 +50,7 @@ class CarRacingServiceTest {
 
 		final CarRacingService sut = new CarRacingService(repository);
 
-		assertThatThrownBy(() -> sut.addCars(raceId, "car1,car2"))
+		assertThatThrownBy(() -> sut.addCars(raceId, List.of(new Car(1L,"test1"),new Car(2L,"test2"))))
 			.isInstanceOf(CarRacingNotFoundException.class)
 			.hasMessage("Car Racing not found: " + raceId);
 	}
@@ -57,7 +62,8 @@ class CarRacingServiceTest {
 		given(repository.findById(raceId))
 			.willReturn(Optional.of(new CarRacing(raceId)));
 
-		final RaceStatusResponse response = sut.addCars(raceId, "car1,car2");
+
+		final RaceStatusResponse response = sut.addCars(raceId, List.of(new Car(1L, "test1"), new Car(2L, "test2")));
 
 		assertThat(response).isEqualTo(new RaceStatusResponse(raceId,null,null,"2 Cars Participated"));
 	}

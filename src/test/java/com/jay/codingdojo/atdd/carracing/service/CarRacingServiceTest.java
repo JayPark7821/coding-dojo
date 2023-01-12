@@ -4,13 +4,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.mockito.BDDMockito.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
 
+@ExtendWith(MockitoExtension.class)
 class CarRacingServiceTest {
 
+	@Mock
 	private CarRacingRepository repository;
 
 	@Test

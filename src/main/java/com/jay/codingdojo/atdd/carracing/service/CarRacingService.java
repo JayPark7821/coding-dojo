@@ -3,6 +3,7 @@ package com.jay.codingdojo.atdd.carracing.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,8 @@ public class CarRacingService {
 	private final CarRacingRepository repository;
 
 	public RaceStatusResponse create() {
-		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.create()");
+		final CarRacing savedCarRacing = repository.save(new CarRacing());
+		return new RaceStatusResponse(savedCarRacing.getId(), null, null, null);
 	}
 
 	public RaceStatusResponse addCars(Long raceId, String carNames) {

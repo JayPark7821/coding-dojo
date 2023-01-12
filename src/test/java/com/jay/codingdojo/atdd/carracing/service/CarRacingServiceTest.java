@@ -50,4 +50,16 @@ class CarRacingServiceTest {
 			.hasMessage("Car Racing not found: " + raceId);
 	}
 
+	@Test
+	void addCars_success() throws Exception {
+		final Long raceId = 1L;
+
+		given(repository.findById(raceId))
+			.willReturn(Optional.of(new CarRacing(raceId)));
+
+		final RaceStatusResponse response = sut.addCars(raceId, "car1,car2");
+
+		assertThat(response).isEqualTo(new RaceStatusResponse(raceId,null,null,"2 Cars Participated"));
+	}
+
 }

@@ -5,6 +5,7 @@ import static org.mockito.BDDMockito.*;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,10 +19,15 @@ class CarRacingServiceTest {
 
 	@Mock
 	private CarRacingRepository repository;
+	private CarRacingService sut;
+
+	@BeforeEach
+	void setUp() {
+		sut = new CarRacingService(repository);
+	}
 
 	@Test
 	void create() {
-		final CarRacingService sut = new CarRacingService(repository);
 
 		given(repository.save(any(CarRacing.class)))
 			.willReturn(new CarRacing(1L));

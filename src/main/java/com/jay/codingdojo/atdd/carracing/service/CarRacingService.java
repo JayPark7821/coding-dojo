@@ -3,6 +3,8 @@ package com.jay.codingdojo.atdd.carracing.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
+
 import lombok.RequiredArgsConstructor;
 
 @Service

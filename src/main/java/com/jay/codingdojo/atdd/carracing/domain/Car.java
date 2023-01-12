@@ -13,6 +13,9 @@ public class Car {
 	private String name;
 
 	public Car(String name) {
+		if (name.length() > 5 || name.length() < 1) {
+			throw new IllegalArgumentException("Car name must be between 1 and 5 characters");
+		}
 		this.name = name;
 	}
 }

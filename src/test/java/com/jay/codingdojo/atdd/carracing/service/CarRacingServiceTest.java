@@ -32,7 +32,7 @@ class CarRacingServiceTest {
 
 	@Test
 	void addCars_when_car_racing_not_found() throws Exception {
-		final Long raceId = 1L;
+		final Long raceId = 999L;
 
 		given(repository.findById(raceId))
 			.willReturn(Optional.empty());

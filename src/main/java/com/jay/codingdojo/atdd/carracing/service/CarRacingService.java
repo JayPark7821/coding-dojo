@@ -21,6 +21,8 @@ public class CarRacingService {
 	}
 
 	public RaceStatusResponse addCars(Long raceId, String carNames) {
+		repository.findById(raceId)
+			.orElseThrow(() -> new CarRacingNotFoundException(raceId));
 		throw new UnsupportedOperationException("com.jay.codingdojo.atdd.carracing.service.CarRacingService.addCars()");
 	}
 

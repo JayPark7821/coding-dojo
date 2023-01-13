@@ -13,12 +13,4 @@ public class RentACar {
 	public void addCar(Car car) {
 		cars.add(car);
 	}
-
-	public double getRequiredFuel(String name, double distance) {
-		Car selectedCar = cars.stream()
-			.filter(car -> car.getName().equals(name))
-			.findFirst().orElseThrow();
-
-		return distance / selectedCar.getDistancePerLiter();
-	}
 }

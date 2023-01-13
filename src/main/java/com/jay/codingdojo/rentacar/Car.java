@@ -3,14 +3,11 @@ package com.jay.codingdojo.rentacar;
 import lombok.Getter;
 
 @Getter
-public class Car {
+public abstract class Car {
 
-	private String name;
-	private double distancePerLiter;
+	abstract double getDistancePerLiter();
 
-	public Car(String name, double distancePerLiter) {
-		this.name = name;
-		this.distancePerLiter = distancePerLiter;
+	double getRequiredFuel(double distance) {
+		return distance / getDistancePerLiter();
 	}
-
 }

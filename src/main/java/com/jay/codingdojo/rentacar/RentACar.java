@@ -14,7 +14,11 @@ public class RentACar {
 		cars.add(car);
 	}
 
-	public double getRequiredFuel(String name, int distance) {
-		throw new UnsupportedOperationException("com.jay.codingdojo.rentacar.RentACar.getRequiredFuel())");
+	public double getRequiredFuel(String name, double distance) {
+		Car selectedCar = cars.stream()
+			.filter(car -> car.getName().equals(name))
+			.findFirst().orElseThrow();
+
+		return distance / selectedCar.getDistancePerLiter();
 	}
 }

@@ -1,5 +1,8 @@
 package com.jay.codingdojo.rentacar;
 
+import lombok.Getter;
+
+@Getter
 public class Car {
 
 	private String name;

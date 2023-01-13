@@ -43,6 +43,10 @@ public class RentACarTest {
 	@Test
 	void canGetRequiredFuel() throws Exception {
 		sut.addCar(new Car("sonnata", 10));
-		assertThat(sut.getRequiredFuel("sonnata", 100)).isEqualTo("10");
+		sut.addCar(new Car("Avante", 15));
+		sut.addCar(new Car("K5", 12));
+		assertThat(sut.getRequiredFuel("sonnata", 100)).isEqualTo(10);
+		assertThat(sut.getRequiredFuel("Avante", 150)).isEqualTo(10);
+		assertThat(sut.getRequiredFuel("K5", 120)).isEqualTo(10);
 	}
 }

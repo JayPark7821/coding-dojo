@@ -42,11 +42,13 @@ public class RentACarTest {
 
 	@Test
 	void canGetRequiredFuel() throws Exception {
-		sut.addCar(new Car("sonnata", 10));
-		sut.addCar(new Car("Avante", 15));
-		sut.addCar(new Car("K5", 12));
-		assertThat(sut.getRequiredFuel("sonnata", 100)).isEqualTo(10);
-		assertThat(sut.getRequiredFuel("Avante", 150)).isEqualTo(10);
-		assertThat(sut.getRequiredFuel("K5", 120)).isEqualTo(10);
+		assertRequiredFuel("k5", 12, 120, 10);
+		assertRequiredFuel("sonnata", 10, 100, 10);
+		assertRequiredFuel("Avante", 15, 150, 10);
+	}
+
+	private void assertRequiredFuel(String name, double distancePerLiter, double distance, double expected) {
+		sut.addCar(new Car(name, distancePerLiter));
+		assertThat(sut.getRequiredFuel(name, distance)).isEqualTo(expected);
 	}
 }

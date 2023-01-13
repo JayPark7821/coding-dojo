@@ -1,5 +1,10 @@
 package com.jay.codingdojo.rentacar;
 
+import static org.assertj.core.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 /**
  * 기능 요구사항
  * 우리 회사는 렌터카를 운영하고 있다. 현재 보유하고 있는 차량은 Sonnata 2대, Avante 1대, K5 1대로 총 5대의 차량을 보유하고 있다.
@@ -15,4 +20,15 @@ package com.jay.codingdojo.rentacar;
  */
 public class RentACarTest {
 
+	private RentACar sut;
+
+	@BeforeEach
+	void setUp() {
+		sut = new RentACar();
+	}
+
+	@Test
+	void canCreateRentACar() throws Exception {
+		assertThat(sut).isNotNull();
+	}
 }

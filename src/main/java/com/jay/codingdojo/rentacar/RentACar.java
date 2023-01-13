@@ -13,4 +13,8 @@ public class RentACar {
 	public void addCar(Car car) {
 		cars.add(car);
 	}
+
+	public double getRequiredFuel(String name, int distance) {
+		throw new UnsupportedOperationException("com.jay.codingdojo.rentacar.RentACar.getRequiredFuel())");
+	}
 }

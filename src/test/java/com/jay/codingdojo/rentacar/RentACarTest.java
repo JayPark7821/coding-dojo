@@ -34,21 +34,21 @@ public class RentACarTest {
 
 	@Test
 	void RentACarCanAddCar() throws Exception {
-		sut.addCar(new Car("sonnata", 10));
-		sut.addCar(new Car("Avante", 15));
-		sut.addCar(new Car("K5", 12));
+		sut.addCar(new Sonnata());
+		sut.addCar(new Avante());
+		sut.addCar(new K5());
 		assertThat(sut.getCars().size()).isEqualTo(3);
 	}
 
 	@Test
 	void canGetRequiredFuel() throws Exception {
-		assertRequiredFuel("k5", 12, 120, 10);
-		assertRequiredFuel("sonnata", 10, 100, 10);
-		assertRequiredFuel("Avante", 15, 150, 10);
+		assertRequiredFuel( new Sonnata(), 100, 10);
+		assertRequiredFuel( new Avante(), 150, 10);
+		assertRequiredFuel(new K5(), 120, 10);
 	}
 
-	private void assertRequiredFuel(String name, double distancePerLiter, double distance, double expected) {
-		sut.addCar(new Car(name, distancePerLiter));
-		assertThat(sut.getRequiredFuel(name, distance)).isEqualTo(expected);
+	private void assertRequiredFuel(Car car, double distance, double expected) {
+		sut.addCar(car);
+		assertThat(car.getRequiredFuel(distance)).isEqualTo(expected);
 	}
 }

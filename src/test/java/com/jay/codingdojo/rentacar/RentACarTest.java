@@ -31,4 +31,12 @@ public class RentACarTest {
 	void canCreateRentACar() throws Exception {
 		assertThat(sut).isNotNull();
 	}
+
+	@Test
+	void RentACarCanAddCar() throws Exception {
+		sut.addCar(new Car("sonnata", 10));
+		sut.addCar(new Car("Avante", 15));
+		sut.addCar(new Car("K5", 12));
+		assertThat(sut.getCars().size()).isEqualTo(3);
+	}
 }

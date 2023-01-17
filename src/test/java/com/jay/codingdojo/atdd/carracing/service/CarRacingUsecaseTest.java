@@ -1,23 +1,17 @@
 package com.jay.codingdojo.atdd.carracing.service;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.mockito.BDDMockito.*;
 
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.jay.codingdojo.atdd.carracing.domain.Car;
-import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
-import com.jay.codingdojo.atdd.carracing.domain.CarRepository;
-
 
 @ExtendWith(MockitoExtension.class)
 public class CarRacingUsecaseTest {
@@ -38,9 +32,15 @@ public class CarRacingUsecaseTest {
 
 		final Long raceId = 1L;
 
+		given(carService.create(any(String.class)))
+			.willReturn(mock(Car.class));
+
+		given(carRacingService.addCars(eq(raceId), any(List.class)))
+			.willReturn(new RaceStatusResponse(raceId, null, null, "2 Cars Participated"));
+
 		final RaceStatusResponse response = sut.addCars(raceId, "car1,car2");
 
-		assertThat(response).isEqualTo(new RaceStatusResponse(raceId,null,null,"2 Cars Participated"));
+		assertThat(response).isEqualTo(new RaceStatusResponse(raceId, null, null, "2 Cars Participated"));
 	}
 
 }

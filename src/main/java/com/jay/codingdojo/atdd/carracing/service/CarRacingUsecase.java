@@ -19,7 +19,7 @@ public class CarRacingUsecase {
 		List<String> carNameList = List.of(names.split(","));
 
 		List<Car> addedCarIds = carNameList.stream()
-			.map(carName -> carService.create(carName))
+			.map(carService::create)
 			.toList();
 
 		return carRacingService.addCars(raceId, addedCarIds);

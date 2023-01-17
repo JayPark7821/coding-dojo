@@ -1,5 +1,7 @@
 package com.jay.codingdojo.atdd.carracing.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,5 +35,12 @@ public class Car {
 		}
 		this.name = name;
 		this.carRacing = carRacing;
+	}
+
+	public static List<Car> createCars(String names, CarRacing carRacing) {
+		List<String> carNames = List.of(names.split(","));
+		return carNames.stream()
+			.map(name -> new Car(name, carRacing))
+			.toList();
 	}
 }

@@ -13,7 +13,8 @@ public class CarService {
 
 	private final CarRepository repository;
 
+	//TODO implement
 	Car create(String name) {
-		return repository.save(new Car(name));
+		throw new UnsupportedOperationException();
 	}
 }

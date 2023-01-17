@@ -1,6 +1,11 @@
 package com.jay.codingdojo.atdd.carracing.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import com.jay.codingdojo.atdd.carracing.domain.Car;
+import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,14 +18,8 @@ public class CarRacingUsecase {
 
 	// TODO implement
 	public RaceStatusResponse addCars(Long raceId, String names) {
-
-		throw new UnsupportedOperationException();
-		// List<String> carNameList = List.of(names.split(","));
-		//
-		// List<Car> addedCarIds = carNameList.stream()
-		// 	.map(carService::create)
-		// 	.toList();
-		//
-		// return carRacingService.addCars(raceId, addedCarIds);
+		CarRacing carRacing = carRacingService.findById(raceId);
+		List<Car> cars = carService.create(names, carRacing);
+		return carRacingService.addCars(carRacing, cars);
 	}
 }

@@ -28,7 +28,6 @@ public class CarRacingUsecaseTest {
 		sut = new CarRacingUsecase(carRacingService, carService);
 	}
 
-
 	@Test
 	void addCars() throws Exception {
 
@@ -40,7 +39,7 @@ public class CarRacingUsecaseTest {
 			.willReturn(carRacing);
 		given(carService.create("car1,car2", carRacing))
 			.willReturn(cars);
-		given(carRacingService.addCars(raceId, cars))
+		given(carRacingService.addCars(carRacing, cars))
 			.willReturn(new RaceStatusResponse(raceId, null, null, "2 Cars Participated"));
 
 		final RaceStatusResponse response = sut.addCars(raceId, "car1,car2");

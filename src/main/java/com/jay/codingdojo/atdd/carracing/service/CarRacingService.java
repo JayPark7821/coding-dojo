@@ -23,12 +23,10 @@ public class CarRacingService {
 		return new RaceStatusResponse(savedCarRacing.getId(), null, null, null);
 	}
 
-	public RaceStatusResponse addCars(Long raceId, List<Car> cars) {
-		CarRacing carRacing = repository.findById(raceId)
-			.orElseThrow(() -> new CarRacingNotFoundException(raceId));
+	public RaceStatusResponse addCars(CarRacing carRacing, List<Car> cars) {
 		cars.forEach(carRacing::addCar);
-
-		return new RaceStatusResponse(raceId, null, null, String.format("%s Cars Participated", cars.size()));
+		return new RaceStatusResponse(carRacing.getId(), null, null,
+			String.format("%s Cars Participated", cars.size()));
 	}
 
 	public RaceStatusResponse startRace(Long raceId) {

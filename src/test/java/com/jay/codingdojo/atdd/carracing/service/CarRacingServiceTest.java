@@ -49,7 +49,7 @@ class CarRacingServiceTest {
 		final CarRacingService sut = new CarRacingService(repository);
 
 		assertThatThrownBy(() -> sut.addCars(
-			raceId,
+			carRacingForCar,
 			List.of(new Car(1L, "test1", carRacingForCar), new Car(2L, "test2", carRacingForCar)))
 		)
 			.isInstanceOf(CarRacingNotFoundException.class)
@@ -60,10 +60,11 @@ class CarRacingServiceTest {
 	void addCars_success() throws Exception {
 		final Long raceId = 1L;
 
+		CarRacing carRacing = new CarRacing(raceId);
 		given(repository.findById(raceId))
-			.willReturn(Optional.of(new CarRacing(raceId)));
+			.willReturn(Optional.of(carRacing));
 
-		final RaceStatusResponse response = sut.addCars(raceId, Car.createCars("car1,car2", new CarRacing(1L)));
+		final RaceStatusResponse response = sut.addCars(carRacing, Car.createCars("car1,car2", new CarRacing(1L)));
 
 		assertThat(response).isEqualTo(new RaceStatusResponse(raceId, null, null, "2 Cars Participated"));
 	}

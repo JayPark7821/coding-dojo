@@ -3,6 +3,7 @@ package com.jay.codingdojo.atdd.carracing.service;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.jay.codingdojo.atdd.carracing.domain.Car;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
 
@@ -36,22 +38,24 @@ class CarRacingServiceTest {
 			.isEqualTo(new RaceStatusResponse(1L, null, null, null));
 	}
 
-	//TODO
 	@Test
 	void addCars_when_car_racing_not_found() throws Exception {
 		final Long raceId = 999L;
 
 		given(repository.findById(raceId))
 			.willReturn(Optional.empty());
+		CarRacing carRacingForCar = new CarRacing();
 
 		final CarRacingService sut = new CarRacingService(repository);
 
-		// assertThatThrownBy(() -> sut.addCars(raceId, List.of(new Car(1L,"test1"),new Car(2L,"test2"))))
-		// 	.isInstanceOf(CarRacingNotFoundException.class)
-		// 	.hasMessage("Car Racing not found: " + raceId);
+		assertThatThrownBy(() -> sut.addCars(
+			raceId,
+			List.of(new Car(1L, "test1", carRacingForCar), new Car(2L, "test2", carRacingForCar)))
+		)
+			.isInstanceOf(CarRacingNotFoundException.class)
+			.hasMessage("Car Racing not found: " + raceId);
 	}
 
-	//TODO
 	@Test
 	void addCars_success() throws Exception {
 		final Long raceId = 1L;
@@ -59,9 +63,9 @@ class CarRacingServiceTest {
 		given(repository.findById(raceId))
 			.willReturn(Optional.of(new CarRacing(raceId)));
 
-		// final RaceStatusResponse response = sut.addCars(raceId, List.of(new Car(1L, "test1"), new Car(2L, "test2")));
+		final RaceStatusResponse response = sut.addCars(raceId, Car.createCars("car1,car2", new CarRacing(1L)));
 
-		// assertThat(response).isEqualTo(new RaceStatusResponse(raceId,null,null,"2 Cars Participated"));
+		assertThat(response).isEqualTo(new RaceStatusResponse(raceId, null, null, "2 Cars Participated"));
 	}
 
 }

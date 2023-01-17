@@ -45,7 +45,7 @@ public class CarRacingService {
 	}
 
 	public CarRacing findById(Long raceId) {
-		throw new UnsupportedOperationException(
-			"com.jay.codingdojo.atdd.carracing.service.CarRacingService.findById()");
+		return repository.findById(raceId)
+			.orElseThrow(() -> new CarRacingNotFoundException(raceId));
 	}
 }

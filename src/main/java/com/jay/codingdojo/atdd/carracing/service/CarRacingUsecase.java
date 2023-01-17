@@ -16,6 +16,7 @@ public class CarRacingUsecase {
 	private final CarService carService;
 
 	public RaceStatusResponse addCars(Long raceId, String names) {
+
 		List<String> carNameList = List.of(names.split(","));
 
 		List<Car> addedCarIds = carNameList.stream()

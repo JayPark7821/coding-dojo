@@ -28,7 +28,7 @@ public class CarRacingService {
 			.orElseThrow(() -> new CarRacingNotFoundException(raceId));
 		cars.forEach(carRacing::addCar);
 
-		return new RaceStatusResponse(raceId,null,null, String.format("%s Cars Participated", cars.size()));
+		return new RaceStatusResponse(raceId, null, null, String.format("%s Cars Participated", cars.size()));
 	}
 
 	public RaceStatusResponse startRace(Long raceId) {
@@ -44,5 +44,10 @@ public class CarRacingService {
 	public RaceStatusResponse getRaceHistory(Long raceId) {
 		throw new UnsupportedOperationException(
 			"com.jay.codingdojo.atdd.carracing.service.CarRacingService.getRaceHistory()");
+	}
+
+	public CarRacing findById(Long raceId) {
+		throw new UnsupportedOperationException(
+			"com.jay.codingdojo.atdd.carracing.service.CarRacingService.findById()");
 	}
 }

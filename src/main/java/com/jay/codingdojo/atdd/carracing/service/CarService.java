@@ -1,5 +1,7 @@
 package com.jay.codingdojo.atdd.carracing.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.jay.codingdojo.atdd.carracing.domain.Car;
@@ -14,7 +16,7 @@ public class CarService {
 	private final CarRepository repository;
 
 	//TODO implement
-	Car create(String name) {
+	List<Car> create(String name) {
 		throw new UnsupportedOperationException();
 	}
 }

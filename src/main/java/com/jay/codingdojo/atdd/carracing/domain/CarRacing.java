@@ -9,14 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @EqualsAndHashCode
 public class CarRacing {
@@ -27,10 +25,6 @@ public class CarRacing {
 
 	@OneToMany(mappedBy = "carRacing")
 	private List<Car> cars = new ArrayList<>();
-
-	public CarRacing(Long id) {
-		this.id = id;
-	}
 
 	public void addCar(Car car) {
 		cars.add(car);

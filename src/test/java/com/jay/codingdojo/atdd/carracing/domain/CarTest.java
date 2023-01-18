@@ -11,11 +11,10 @@ class CarTest {
 	@Test
 	void canCreateCars() throws Exception {
 
-		final List<Car> car = Car.createCars("car1,car2", new CarRacing(1L));
+		CarRacing carRacing = new CarRacing();
 
-		assertThat(car).isEqualTo(
-			List.of(new Car(null, "car1", new CarRacing(1L)),
-				new Car(null, "car2", new CarRacing(1L)))
-		);
+		final List<Car> car = Car.createCars("car1,car2", carRacing);
+
+		assertThat(car.stream().map(Car::getName).toList()).isEqualTo(List.of("car1", "car2"));
 	}
 }

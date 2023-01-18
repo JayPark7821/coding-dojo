@@ -26,12 +26,14 @@ class CarRacingServiceTest {
 	}
 
 	@Test
+	@Sql("classpath:atdd/carracing/insert-carracing.sql")
 	void addCars_success() throws Exception {
 		final Long raceId = 1L;
 
-		CarRacing carRacing = new CarRacing(raceId);
+		// CarRacing carRacing = new CarRacing(raceId);
+		CarRacing carRacing = sut.findById(1L);
 
-		final RaceStatusResponse response = sut.addCars(carRacing, Car.createCars("car1,car2", new CarRacing(1L)));
+		final RaceStatusResponse response = sut.addCars(carRacing, Car.createCars("car1,car2", carRacing));
 
 		assertThat(response).isEqualTo(new RaceStatusResponse(raceId, null, null, "2 Cars Participated"));
 	}
@@ -41,11 +43,9 @@ class CarRacingServiceTest {
 	void can_find_by_id() throws Exception {
 		final Long raceId = 1L;
 
-		CarRacing carRacing = new CarRacing(raceId);
-
 		CarRacing savedCarRacing = sut.findById(raceId);
 
-		assertThat(savedCarRacing.getId()).isEqualTo(carRacing.getId());
+		assertThat(savedCarRacing.getId()).isEqualTo(raceId);
 	}
 
 	@Test

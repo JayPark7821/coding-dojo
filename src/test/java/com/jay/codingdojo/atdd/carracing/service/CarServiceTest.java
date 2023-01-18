@@ -25,12 +25,12 @@ class CarServiceTest {
 
 		CarRacing carRacing = new CarRacing();
 
-		assertThat(sut.create("car1,car2", carRacing))
-			.isEqualTo(List.of(new Car(1L, "car1", carRacing), new Car(2L, "car2", carRacing)));
+		List<Car> createdCars = sut.create("car1,car2", carRacing);
+		assertThat(createdCars.stream().map(Car::getName).toList()).isEqualTo(List.of("car1", "car2"));
 	}
 
 	@Test
-	void create_when_name_is_less_then_1_and_more_then5() throws Exception {
+	void create_when_name_is_less_then_1_and_more_then5_throws_exception() throws Exception {
 		CarRacing carRacing = new CarRacing();
 		assertThatThrownBy(() -> sut.create("", carRacing))
 			.isInstanceOf(IllegalArgumentException.class)

@@ -74,23 +74,20 @@ public class CarRacingControllerAcceptanceTest {
 			.statusCode(200)
 			.extract().jsonPath();
 
-		assertThat(response.getLong("id")).isEqualTo(1L);
+		assertThat(response.getLong("raceId")).isEqualTo(1L);
 	}
 
 	@Test
 	@DisplayName("레이싱 게임에 참여자를 추가한다.")
 	void addCars() throws Exception {
-		Map<String, Object> carNames = new HashMap<>();
-		carNames.put("carNames", "test1,test2,test3");
 
 		final JsonPath response = RestAssured.
 
 			given()
-			.contentType(ContentType.JSON)
-			.body(carNames).
+			.contentType(ContentType.JSON).
 
 			when()
-			.post("/api/jay/car-racing/1/car").
+			.post("/api/jay/car-racing/1/car?carNames=test1,test2,test3").
 
 			then()
 			.statusCode(200)

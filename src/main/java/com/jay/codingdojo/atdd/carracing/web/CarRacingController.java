@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jay.codingdojo.atdd.carracing.service.CarRacingService;
@@ -27,7 +28,7 @@ public class CarRacingController {
 	}
 
 	@PostMapping("/{raceId}/car")
-	RaceStatusResponse addCars(@PathVariable("raceId") final Long raceId, String carNames) {
+	RaceStatusResponse addCars(@PathVariable("raceId") final Long raceId, @RequestParam String carNames) {
 		return carRacingUsecase.addCars(raceId, carNames);
 	}
 

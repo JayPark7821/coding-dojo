@@ -1,39 +1,26 @@
 package com.jay.codingdojo.atdd.carracing.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.mockito.BDDMockito.*;
-
-import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.carracing.domain.Car;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
-import com.jay.codingdojo.atdd.carracing.domain.CarRacingRepository;
 
-@ExtendWith(MockitoExtension.class)
+@DataJpaTest
+@Import(CarRacingService.class)
 class CarRacingServiceTest {
 
-	@Mock
-	private CarRacingRepository repository;
+	@Autowired
 	private CarRacingService sut;
-
-	@BeforeEach
-	void setUp() {
-		sut = new CarRacingService(repository);
-	}
 
 	@Test
 	void create() {
-
-		given(repository.save(any(CarRacing.class)))
-			.willReturn(new CarRacing(1L));
-
 		assertThat(sut.create())
 			.isEqualTo(new RaceStatusResponse(1L, null, null, null));
 	}
@@ -50,25 +37,20 @@ class CarRacingServiceTest {
 	}
 
 	@Test
+	@Sql("classpath:atdd/carracing/insert-carracing.sql")
 	void can_find_by_id() throws Exception {
 		final Long raceId = 1L;
 
 		CarRacing carRacing = new CarRacing(raceId);
 
-		given(repository.findById(raceId))
-			.willReturn(Optional.of(carRacing));
-
 		CarRacing savedCarRacing = sut.findById(raceId);
 
-		assertThat(savedCarRacing).isEqualTo(carRacing);
+		assertThat(savedCarRacing.getId()).isEqualTo(carRacing.getId());
 	}
 
 	@Test
 	void find_by_id_fail() throws Exception {
 		final Long raceId = 1L;
-
-		given(repository.findById(raceId))
-			.willReturn(Optional.empty());
 
 		Assertions.assertThrows(CarRacingNotFoundException.class,
 			() -> {

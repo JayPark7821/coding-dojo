@@ -1,39 +1,29 @@
 package com.jay.codingdojo.atdd.carracing.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.mockito.BDDMockito.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 
 import com.jay.codingdojo.atdd.carracing.domain.Car;
 import com.jay.codingdojo.atdd.carracing.domain.CarRacing;
 import com.jay.codingdojo.atdd.carracing.domain.CarRepository;
 
-@ExtendWith(MockitoExtension.class)
+@DataJpaTest
+@Import({CarService.class, CarRepository.class})
 class CarServiceTest {
 
+	@Autowired
 	private CarService sut;
-	@Mock
-	private CarRepository repository;
-
-	@BeforeEach
-	void setUp() {
-		sut = new CarService(repository);
-	}
 
 	@Test
 	void create() throws Exception {
 
 		CarRacing carRacing = new CarRacing();
-
-		given(repository.saveAll(Car.createCars("car1,car2", carRacing)))
-			.willReturn(List.of(new Car(1L, "car1", carRacing), new Car(2L, "car2", carRacing)));
 
 		assertThat(sut.create("car1,car2", carRacing))
 			.isEqualTo(List.of(new Car(1L, "car1", carRacing), new Car(2L, "car2", carRacing)));

@@ -18,7 +18,7 @@ public class UserApiControllerAcceptanceTest {
 	@LocalServerPort
 	private int port;
 
-	private static final String PROVIDER = "LOCAL";
+	private static final String PROVIDER = "GOOGLE";
 	private static final String ID_TOKEN = "test-token";
 
 	@BeforeEach

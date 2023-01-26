@@ -34,6 +34,7 @@ dependencies {
     testImplementation "io.rest-assured:rest-assured:4.4.0"
     testImplementation 'io.rest-assured:spring-mock-mvc:5.1.1'
 
+    implementation 'com.google.api-client:google-api-client:1.32.1'
 }
 
 tasks.named('test') {

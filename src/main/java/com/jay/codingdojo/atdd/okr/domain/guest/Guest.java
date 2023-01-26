@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,14 @@ public class Guest {
 
 	private String profileImage;
 
+	@Builder
+	public Guest(String guestUuid, String guestId, String guestName, String email, ProviderType providerType,
+		String profileImage) {
+		this.guestUuid = guestUuid;
+		this.guestId = guestId;
+		this.guestName = guestName;
+		this.email = email;
+		this.providerType = providerType;
+		this.profileImage = profileImage;
+	}
 }

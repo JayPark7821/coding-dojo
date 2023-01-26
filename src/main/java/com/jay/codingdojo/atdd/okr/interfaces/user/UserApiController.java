@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
-public class userApiController {
+public class UserApiController {
 
 	@PostMapping("/login/{provider}/{idToken}")
 	LoginResponse loginWithIdToken(

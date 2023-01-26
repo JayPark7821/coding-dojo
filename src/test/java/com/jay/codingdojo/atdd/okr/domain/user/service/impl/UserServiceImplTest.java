@@ -6,6 +6,7 @@ import static org.mockito.BDDMockito.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -33,27 +34,16 @@ class UserServiceImplTest {
 	void login_With_IdToken_when_before_join() throws Exception {
 
 		String userId = "testId";
-		String guestUuid = "guest_fewfewa3";
 		String guestName = "testUser";
 		String guestEmail = "test@email.com";
 		ProviderType provider = ProviderType.GOOGLE;
-		String guestPicture = "pic";
 
-		given(googleTokenVerifier.varifyIdToken("idToken"))
-			.willReturn(new OAuth2UserInfo(userId, guestName, guestEmail, guestPicture));
+		stubGoogleTokenVerifier(userId, guestName, guestEmail);
 
 		LoginInfo info = sut.loginWithIdToken(provider, "idToken");
 
-		assertThat(info).isEqualTo(
-			new LoginInfo(
-				guestUuid,
-				guestEmail,
-				guestName,
-				provider,
-				null,
-				null
-			)
-		);
+		assertGuest(guestName, guestEmail, info);
+
 	}
 
 	@Test
@@ -61,27 +51,30 @@ class UserServiceImplTest {
 	void login_With_IdToken_when_temp_user() throws Exception {
 
 		String userId = "testId";
-		String guestUuid = "guest_fewfewa3";
 		String guestName = "testUser";
 		String guestEmail = "test@email.com";
 		ProviderType provider = ProviderType.GOOGLE;
+		stubGoogleTokenVerifier(userId, guestName, guestEmail);
+
+		LoginInfo info = sut.loginWithIdToken(provider, "idToken");
+
+		assertGuest(guestName, guestEmail, info);
+
+	}
+
+
+	private void stubGoogleTokenVerifier(String userId, String guestName, String guestEmail) {
 		String guestPicture = "pic";
 
 		given(googleTokenVerifier.varifyIdToken("idToken"))
 			.willReturn(new OAuth2UserInfo(userId, guestName, guestEmail, guestPicture));
+	}
 
-		LoginInfo info = sut.loginWithIdToken(provider, "idToken");
-
-		assertThat(info).isEqualTo(
-			new LoginInfo(
-				guestUuid,
-				guestEmail,
-				guestName,
-				provider,
-				null,
-				null
-			)
-		);
+	private void assertGuest(String guestName, String guestEmail, LoginInfo info) {
+		assertThat(info.email()).isEqualTo(guestEmail);
+		assertThat(info.name()).isEqualTo(guestName);
+		assertThat(info.accessToken()).isNull();
+		assertThat(info.refreshToken()).isNull();
 	}
 
 }

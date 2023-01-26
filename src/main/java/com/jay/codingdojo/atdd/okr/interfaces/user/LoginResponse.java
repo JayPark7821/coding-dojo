@@ -6,6 +6,6 @@ import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
 public record LoginResponse(String guestId, String email, String name, ProviderType providerType, String accessToken,
 							String refreshToken) {
 	public LoginResponse(LoginInfo info) {
-		this(info.guestId(), info.email(), info.name(), info.providerType(), info.accessToken(), info.refreshToken());
+		this(info.guestUuId(), info.email(), info.name(), info.providerType(), info.accessToken(), info.refreshToken());
 	}
 }

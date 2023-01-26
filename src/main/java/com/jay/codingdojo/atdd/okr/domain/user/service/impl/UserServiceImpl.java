@@ -8,12 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.jay.codingdojo.atdd.okr.domain.guest.Guest;
+import com.jay.codingdojo.atdd.okr.domain.guest.GuestRepository;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.User;
+import com.jay.codingdojo.atdd.okr.domain.user.UserRepository;
 import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
-import com.jay.codingdojo.atdd.okr.infrastructure.guest.GuestRepository;
-import com.jay.codingdojo.atdd.okr.infrastructure.user.UserRepository;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.GoogleTokenVerifier;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
 

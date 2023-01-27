@@ -6,12 +6,12 @@ import static org.mockito.BDDMockito.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
@@ -47,6 +47,7 @@ class UserServiceImplTest {
 	}
 
 	@Test
+	@Sql("classpath:atdd/okr/insert-guest.sql")
 	@DisplayName("회원 가입을 완료하지 않고 어플리케이션을 종료한 경우 idToken을 통해 로그인을 시도하면 새로운 응답(Guest)을 반환한다.")
 	void login_With_IdToken_when_temp_user() throws Exception {
 
@@ -54,6 +55,7 @@ class UserServiceImplTest {
 		String guestName = "testUser";
 		String guestEmail = "test@email.com";
 		ProviderType provider = ProviderType.GOOGLE;
+
 		stubGoogleTokenVerifier(userId, guestName, guestEmail);
 
 		LoginInfo info = sut.loginWithIdToken(provider, "idToken");
@@ -61,7 +63,6 @@ class UserServiceImplTest {
 		assertGuest(guestName, guestEmail, info);
 
 	}
-
 
 	private void stubGoogleTokenVerifier(String userId, String guestName, String guestEmail) {
 		String guestPicture = "pic";

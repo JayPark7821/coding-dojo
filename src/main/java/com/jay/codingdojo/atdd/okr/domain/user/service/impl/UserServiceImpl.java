@@ -1,7 +1,6 @@
 package com.jay.codingdojo.atdd.okr.domain.user.service.impl;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -39,15 +38,7 @@ public class UserServiceImpl implements UserService {
 			if (user.isEmpty()) {
 				Optional<Guest> savedGuest = guestRepository.findByGuestId(info.id());
 				savedGuest.ifPresent(guestRepository::delete);
-				Guest guest = Guest.builder()
-					.guestUuid("guest_" + UUID.randomUUID().toString().substring(0, 6))
-					.guestId(info.id())
-					.email(info.email())
-					.guestName(info.name())
-					.profileImage(info.picture())
-					.providerType(providerType)
-					.build();
-				Guest newGuest = guestRepository.save(guest);
+				Guest newGuest = guestRepository.save(info.toGuest(providerType));
 				return new LoginInfo(newGuest);
 			}
 		}

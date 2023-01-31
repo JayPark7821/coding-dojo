@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jay.codingdojo.atdd.okr.application.user.UserFacade;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
-import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/v1/user")
 public class UserApiController {
 
-	private final UserService userService;
+	private final UserFacade UserFacade;
 
 	@PostMapping("/login/{provider}/{idToken}")
 	ResponseEntity<LoginResponse> loginWithIdToken(
 		@PathVariable("provider") String provider,
 		@PathVariable("idToken") String idToken
 	) {
-		LoginInfo loginInfo = userService.loginWithIdToken(ProviderType.valueOf(provider), idToken);
+		LoginInfo loginInfo = UserFacade.loginWithIdToken(ProviderType.valueOf(provider), idToken);
 		LoginResponse loginResponse = new LoginResponse(loginInfo);
 
 		return ResponseEntity.status(HttpStatus.CREATED)

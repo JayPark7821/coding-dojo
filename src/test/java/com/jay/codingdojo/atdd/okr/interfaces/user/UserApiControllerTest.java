@@ -11,19 +11,19 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
+import com.jay.codingdojo.atdd.okr.application.user.UserFacade;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
-import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 class UserApiControllerTest {
 
 	@Mock
-	private UserService userService;
+	private UserFacade UserFacade;
 
 	@BeforeEach
 	void setUp() {
-		BDDMockito.given(userService.loginWithIdToken(ProviderType.GOOGLE, "idToken"))
+		BDDMockito.given(UserFacade.loginWithIdToken(ProviderType.GOOGLE, "idToken"))
 			.willReturn(new LoginInfo(
 				"guest_fewfewa3",
 				"test@email.com",
@@ -37,7 +37,7 @@ class UserApiControllerTest {
 	@Test
 	@DisplayName("가입한 유저 정보가 없을 때  idToken을 통해 로그인을 시도하면 기대하는 응답(Guest)을 반환한다.")
 	void login_With_IdToken_when_before_join() throws Exception {
-		final UserApiController sut = new UserApiController(userService);
+		final UserApiController sut = new UserApiController(UserFacade);
 
 		ResponseEntity<LoginResponse> response = sut.loginWithIdToken("GOOGLE", "idToken");
 

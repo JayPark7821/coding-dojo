@@ -38,8 +38,9 @@ public class UserServiceImpl implements UserService {
 			if (user.isEmpty()) {
 				Optional<Guest> savedGuest = guestRepository.findByGuestId(info.id());
 				savedGuest.ifPresent(guestRepository::delete);
-				Guest newGuest = guestRepository.save(info.toGuest(providerType));
-				return new LoginInfo(newGuest);
+				Guest newGuest = info.toGuest(providerType);
+				newGuest.setGuestUuidForNewGuest();
+				return new LoginInfo(guestRepository.save(newGuest));
 			}
 		}
 		throw new IllegalStateException();

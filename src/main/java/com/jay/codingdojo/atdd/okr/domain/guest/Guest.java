@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.jay.codingdojo.atdd.okr.common.utils.TokenGenerator;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 
 import lombok.Builder;
@@ -41,5 +42,9 @@ public class Guest {
 		this.email = email;
 		this.providerType = providerType;
 		this.profileImage = profileImage;
+	}
+
+	public void setGuestUuidForNewGuest() {
+		this.guestUuid = TokenGenerator.randomCharacterWithPrefix("guest-");
 	}
 }

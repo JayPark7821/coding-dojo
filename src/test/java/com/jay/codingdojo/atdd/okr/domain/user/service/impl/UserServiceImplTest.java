@@ -45,7 +45,7 @@ class UserServiceImplTest {
 
 		Assertions.assertThat(userWholeInfo)
 			.isEqualTo(
-				new UserWholeInfo(Optional.empty(), new OAuth2UserInfo(userId, userName, userEmail, userPicture)));
+				new UserWholeInfo(Optional.empty(), new OAuth2UserInfo(userId, userName, userEmail, userPicture, ProviderType.GOOGLE)));
 	}
 
 	@Test
@@ -61,14 +61,14 @@ class UserServiceImplTest {
 		UserWholeInfo userWholeInfo = sut.getUserWholeInfoFromIdToken(ProviderType.GOOGLE, "idToken");
 
 		Assertions.assertThat(userWholeInfo.oAuth2UserInfo())
-			.isEqualTo(new OAuth2UserInfo(userId, userName, userEmail, userPicture));
+			.isEqualTo(new OAuth2UserInfo(userId, userName, userEmail, userPicture, ProviderType.GOOGLE));
 		Assertions.assertThat(userWholeInfo.user().get().getUserSeq())
 			.isEqualTo(1L);
 	}
 
 	private void stubGoogleTokenVerifier(String userId, String userName, String userEmail, String userPicture) {
 		given(googleTokenVerifier.varifyIdToken("idToken"))
-			.willReturn(new OAuth2UserInfo(userId, userName, userEmail, userPicture));
+			.willReturn(new OAuth2UserInfo(userId, userName, userEmail, userPicture, ProviderType.GOOGLE));
 	}
 
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.common.utils.TokenGenerator;
 import com.jay.codingdojo.atdd.okr.domain.guest.Guest;
@@ -30,6 +31,21 @@ class GuestServiceImplTest {
 		OAuth2UserInfo info = new OAuth2UserInfo("testId", "testName", "testEmail@mail.com", "testPicture", ProviderType.GOOGLE);
 		Guest guest = sut.createNewGuest(info);
 
+		assertNewGuset(info, guest);
+	}
+
+	@Test
+	@DisplayName("Guest를 생성한다. (회원가입 시도 했던적 O)")
+	@Sql("classpath:atdd/okr/insert-guest.sql")
+	void create_new_guest_when_exist() {
+		OAuth2UserInfo info = new OAuth2UserInfo("testId", "testName", "testEmail@mail.com", "testPicture", ProviderType.GOOGLE);
+		Guest guest = sut.createNewGuest(info);
+
+		assertExistedGuest(info, guest);
+	}
+
+
+	private void assertNewGuset(OAuth2UserInfo info, Guest guest) {
 		assertThat(guest.getGuestName()).isEqualTo(info.name());
 		assertThat(guest.getEmail()).isEqualTo(info.email());
 		assertThat(guest.getGuestId()).isEqualTo(info.id());
@@ -39,4 +55,14 @@ class GuestServiceImplTest {
 			Pattern.compile("guest-[a-zA-Z0-9]{14}")
 		);
 	}
+
+	private void assertExistedGuest(OAuth2UserInfo info, Guest guest) {
+		assertThat(guest.getGuestName()).isEqualTo(info.name());
+		assertThat(guest.getEmail()).isEqualTo(info.email());
+		assertThat(guest.getGuestId()).isEqualTo(info.id());
+		assertThat(guest.getProfileImage()).isEqualTo(info.picture());
+		assertThat(guest.getProviderType()).isEqualTo(info.providerType());
+		assertThat(guest.getGuestUuid()).isNotEqualTo("guest_ffeda");
+	}
+
 }

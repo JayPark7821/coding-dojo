@@ -9,11 +9,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
+import com.jay.codingdojo.atdd.okr.domain.guest.service.GuestService;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 
 @DataJpaTest
-@Import(UserFacade.class)
+@Import({UserFacade.class, UserService.class, GuestService.class})
 public class UserFacadeTest {
 
 	@Autowired

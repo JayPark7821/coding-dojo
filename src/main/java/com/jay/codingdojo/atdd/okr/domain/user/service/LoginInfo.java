@@ -2,6 +2,7 @@ package com.jay.codingdojo.atdd.okr.domain.user.service;
 
 import com.jay.codingdojo.atdd.okr.domain.guest.Guest;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
+import com.jay.codingdojo.atdd.okr.domain.user.User;
 
 public record LoginInfo(String guestUuId, String email, String name, ProviderType providerType, String accessToken,
 						String refreshToken) {
@@ -19,4 +20,9 @@ public record LoginInfo(String guestUuId, String email, String name, ProviderTyp
 	public LoginInfo(Guest guest) {
 		this(guest.getGuestUuid(), guest.getEmail(), guest.getGuestName(), guest.getProviderType(), null, null);
 	}
+
+	public LoginInfo(User user, String accessToken, String refreshToken) {
+		this(null , user.getEmail(), user.getUsername(), user.getProviderType(), accessToken, refreshToken);
+	}
+
 }

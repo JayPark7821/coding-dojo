@@ -43,4 +43,11 @@ public class User {
 		this.profileImage = profileImage;
 		this.providerType = providerType;
 	}
+
+	public boolean canUserLogin(ProviderType providerType) {
+		if (providerType != this.providerType) {
+			throw new IllegalStateException(this.providerType+ "(으)로 가입한 계정이 있습니다.");
+		}
+		return true;
+	}
 }

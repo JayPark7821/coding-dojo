@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
+import com.jay.codingdojo.atdd.okr.domain.user.User;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserWholeInfo;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.GoogleTokenVerifier;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
@@ -44,6 +46,24 @@ class UserServiceImplTest {
 		Assertions.assertThat(userWholeInfo)
 			.isEqualTo(
 				new UserWholeInfo(Optional.empty(), new OAuth2UserInfo(userId, userName, userEmail, userPicture)));
+	}
+
+	@Test
+	@DisplayName("ProviderType과 idToken으로 인증하고 인증된 정보로 user테이블 조회 그결과를 인증된 정보화 함께 UserWholeInfo로 반환한다. user정보 있는 케이스")
+	@Sql("classpath:atdd/okr/insert-user.sql")
+	void request_userWholeInfo_by_providerType_and_idToken_when_user_present() throws Exception {
+		String userId = "testId";
+		String userName = "testUser";
+		String userEmail = "test@email.com";
+		String userPicture = "testPicture";
+		stubGoogleTokenVerifier(userId, userName, userEmail,userPicture);
+
+		UserWholeInfo userWholeInfo = sut.getUserWholeInfoFromIdToken(ProviderType.GOOGLE, "idToken");
+
+		Assertions.assertThat(userWholeInfo.oAuth2UserInfo())
+			.isEqualTo(new OAuth2UserInfo(userId, userName, userEmail, userPicture));
+		Assertions.assertThat(userWholeInfo.user().get().getUserSeq())
+			.isEqualTo(1L);
 	}
 
 	private void stubGoogleTokenVerifier(String userId, String userName, String userEmail, String userPicture) {

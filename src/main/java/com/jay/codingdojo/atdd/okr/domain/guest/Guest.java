@@ -34,9 +34,9 @@ public class Guest {
 	private String profileImage;
 
 	@Builder
-	public Guest(String guestUuid, String guestId, String guestName, String email, ProviderType providerType,
+	public Guest(String guestId, String guestName, String email, ProviderType providerType,
 		String profileImage) {
-		this.guestUuid = guestUuid;
+		setGuestUuidForNewGuest();
 		this.guestId = guestId;
 		this.guestName = guestName;
 		this.email = email;

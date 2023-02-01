@@ -21,6 +21,10 @@ public class GuestServiceImpl implements GuestService {
 
 	@Override
 	public Guest createNewGuest(OAuth2UserInfo oAuth2UserInfo) {
-		throw new UnsupportedOperationException();
+		Optional<Guest> savedGuest = guestRepository.findByGuestId(oAuth2UserInfo.id());
+		if (savedGuest.isPresent()) {
+			guestRepository.delete(savedGuest.get());
+		}
+		return guestRepository.save(oAuth2UserInfo.toGuest());
 	}
 }

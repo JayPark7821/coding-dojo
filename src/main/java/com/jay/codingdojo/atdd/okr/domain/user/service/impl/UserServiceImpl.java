@@ -11,8 +11,8 @@ import com.jay.codingdojo.atdd.okr.domain.user.User;
 import com.jay.codingdojo.atdd.okr.domain.user.UserRepository;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserWholeInfo;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
-import com.jay.codingdojo.atdd.okr.interfaces.user.auth.GoogleTokenVerifier;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
+import com.jay.codingdojo.atdd.okr.interfaces.user.auth.TokenVerifier;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	private final GoogleTokenVerifier googleTokenVerifier;
+	private final TokenVerifier tokenVerifier;
 	private final UserRepository userRepository;
 
 
 	@Override
 	public UserWholeInfo getUserWholeInfoFromIdToken(ProviderType provider, String idToken) {
-		OAuth2UserInfo userInfo = googleTokenVerifier.varifyIdToken(idToken);
+		OAuth2UserInfo userInfo = tokenVerifier.verifyIdToken(idToken);
 		Optional<User> user = userRepository.findByEmail(userInfo.email());
 		return new UserWholeInfo(user, userInfo);
 	}

@@ -73,7 +73,7 @@ public class UserFacadeTest {
 	}
 
 	private void stubGoogleTokenVerifier(String userId, String userName, String userEmail, String userPicture) {
-		given(googleTokenVerifier.varifyIdToken("idToken"))
+		given(googleTokenVerifier.verifyIdToken("idToken"))
 			.willReturn(new OAuth2UserInfo(userId, userName, userEmail, userPicture, ProviderType.GOOGLE));
 	}
 

@@ -15,12 +15,13 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 
 @Component
-public class GoogleTokenVerifier {
+public class GoogleTokenVerifier implements TokenVerifier {
 
 	private final NetHttpTransport transport = new NetHttpTransport();
 	private final JsonFactory jsonFactory = new GsonFactory();
 
-	public OAuth2UserInfo varifyIdToken(String token) {
+	@Override
+	public OAuth2UserInfo verifyIdToken(String token) {
 		String clientId = "test";
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
 			.setIssuers(Arrays.asList("https://accounts.google.com", "accounts.google.com"))

@@ -11,7 +11,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.domain.guest.service.GuestService;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
-import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 
 @DataJpaTest

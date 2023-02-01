@@ -1,4 +1,4 @@
-package com.jay.codingdojo.atdd.okr.domain.user.service;
+package com.jay.codingdojo.atdd.okr.application.user;
 
 import com.jay.codingdojo.atdd.okr.domain.guest.Guest;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;

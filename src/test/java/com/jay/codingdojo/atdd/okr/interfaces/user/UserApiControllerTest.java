@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.jay.codingdojo.atdd.okr.application.user.UserFacade;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
-import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
+import com.jay.codingdojo.atdd.okr.application.user.LoginInfo;
 
 @ExtendWith(MockitoExtension.class)
 class UserApiControllerTest {

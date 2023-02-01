@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jay.codingdojo.atdd.okr.application.user.UserFacade;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
-import com.jay.codingdojo.atdd.okr.domain.user.service.LoginInfo;
+import com.jay.codingdojo.atdd.okr.application.user.LoginInfo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -15,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.domain.guest.service.GuestService;
 import com.jay.codingdojo.atdd.okr.domain.guest.service.impl.GuestServiceImpl;
+import com.jay.codingdojo.atdd.okr.domain.token.service.impl.TokenServiceImpl;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 import com.jay.codingdojo.atdd.okr.domain.user.service.impl.UserServiceImpl;
@@ -23,7 +24,7 @@ import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
 
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
-@Import({UserFacade.class, UserServiceImpl.class, GuestServiceImpl.class})
+@Import({UserFacade.class, UserServiceImpl.class, GuestServiceImpl.class, TokenServiceImpl.class})
 public class UserFacadeTest {
 
 	@Autowired

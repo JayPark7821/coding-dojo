@@ -15,6 +15,6 @@ public class TokenServiceImpl implements TokenService {
 
 	@Override
 	public AuthTokenInfo generateTokenSet(String userEmail) {
-		throw new UnsupportedOperationException();
+		return new AuthTokenInfo("access-token", "refresh-token");
 	}
 }

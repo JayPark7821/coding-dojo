@@ -28,8 +28,9 @@ public class UserFacade {
 		Optional<User> user = userWholeInfo.user();
 
 		if (user.isPresent()) {
-			if (user.get().canUserLogin(provider)) {
-				return new LoginInfo(user.get(), "accessToken", "refreshToken");
+			User joinedUser = user.get();
+			if (joinedUser.canUserLogin(provider)) {
+				return new LoginInfo(joinedUser, tokenService.generateTokenSet(joinedUser.getEmail()));
 			}
 		}
 		return new LoginInfo(guestService.createNewGuest(userWholeInfo.oAuth2UserInfo()));

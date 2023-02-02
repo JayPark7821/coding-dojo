@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.jay.codingdojo.atdd.okr.domain.guest.service.GuestService;
+import com.jay.codingdojo.atdd.okr.domain.token.service.TokenService;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.User;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserWholeInfo;
@@ -20,6 +21,7 @@ public class UserFacade {
 
 	private final UserService userService;
 	private final GuestService guestService;
+	private final TokenService tokenService;
 
 	public LoginInfo loginWithIdToken(ProviderType provider, String idToken) {
 		UserWholeInfo userWholeInfo = userService.getUserWholeInfoFromIdToken(provider, idToken);

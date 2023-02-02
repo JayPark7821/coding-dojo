@@ -5,12 +5,12 @@ import com.jay.codingdojo.atdd.okr.domain.token.service.AuthTokenInfo;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.User;
 
-public record LoginInfo(String guestUuId, String email, String name, ProviderType providerType, String accessToken,
+public record LoginInfo(String guestUuid, String email, String name, ProviderType providerType, String accessToken,
 						String refreshToken) {
 
-	public LoginInfo(String guestUuId, String email, String name, ProviderType providerType, String accessToken,
+	public LoginInfo(String guestUuid, String email, String name, ProviderType providerType, String accessToken,
 		String refreshToken) {
-		this.guestUuId = guestUuId;
+		this.guestUuid = guestUuid;
 		this.email = email;
 		this.name = name;
 		this.providerType = providerType;

@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.FakeTokenVerifier;
 import com.jay.codingdojo.atdd.okr.TestConfig;
@@ -65,5 +66,32 @@ public class UserApiControllerAcceptanceTest {
 		assertThat(response.getString("providerType")).isEqualTo(FakeTokenVerifier.provider.name());
 		assertThat(response.getString("accessToken")).isNull();
 		assertThat(response.getString("refreshToken")).isNull();
+	}
+
+	@Test
+	@Sql("classpath:atdd/okr/insert-user.sql")
+	@DisplayName("가입한 유저 정보가 있을 때  idToken을 통해 로그인을 시도하면 기대하는 응답(Tokens)을 반환한다.")
+	void login_With_IdToken_when_after_join() throws Exception {
+
+		final JsonPath response = RestAssured.
+
+			given()
+			.contentType(ContentType.JSON).
+
+			when()
+			.post("/api/v1/user/login/" + PROVIDER + "/" + ID_TOKEN).
+
+			then()
+			.statusCode(201)
+			.extract().jsonPath();
+
+
+		assertThat(response.getString("guestId")).isNull();
+		assertThat(response.getString("email")).isEqualTo(FakeTokenVerifier.email);
+		assertThat(response.getString("name")).isEqualTo(FakeTokenVerifier.name);
+		assertThat(response.getString("providerType")).isEqualTo(FakeTokenVerifier.provider.name());
+		assertThat(response.getString("accessToken")).isEqualTo("access-token");
+		assertThat(response.getString("refreshToken")).isEqualTo("refresh-token");
+
 	}
 }

@@ -4,6 +4,7 @@ import com.jay.codingdojo.atdd.okr.domain.guest.Guest;
 import com.jay.codingdojo.atdd.okr.domain.token.service.AuthTokenInfo;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.User;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfo;
 
 public record LoginInfo(String guestUuid, String email, String name, ProviderType providerType, String accessToken,
 						String refreshToken) {
@@ -22,8 +23,8 @@ public record LoginInfo(String guestUuid, String email, String name, ProviderTyp
 		this(guest.getGuestUuid(), guest.getEmail(), guest.getGuestName(), guest.getProviderType(), null, null);
 	}
 
-	public LoginInfo(User user, AuthTokenInfo authTokenInfo) {
-		this(null , user.getEmail(), user.getUsername(), user.getProviderType(), authTokenInfo.accessToken(),
+	public LoginInfo(UserInfo userInfo, AuthTokenInfo authTokenInfo) {
+		this(null , userInfo.email(), userInfo.name(), userInfo.providerType(), authTokenInfo.accessToken(),
 			authTokenInfo.refreshToken() );
 	}
 

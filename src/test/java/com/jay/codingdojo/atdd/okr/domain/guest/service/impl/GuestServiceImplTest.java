@@ -16,6 +16,8 @@ import org.springframework.test.context.jdbc.Sql;
 import com.jay.codingdojo.atdd.okr.common.utils.TokenGenerator;
 import com.jay.codingdojo.atdd.okr.domain.guest.Guest;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfoType;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
 
 @DataJpaTest
@@ -28,7 +30,7 @@ class GuestServiceImplTest {
 	@Test
 	@DisplayName("Guest를 생성한다. (한번도 회원가입 시도 X)")
 	void create_new_guest_when_not_exist() {
-		OAuth2UserInfo info = new OAuth2UserInfo("testId", "testName", "testEmail@mail.com", "testPicture", ProviderType.GOOGLE);
+		UserInfo info = new UserInfo(UserInfoType.GUEST,"testId", "testName", "testEmail@mail.com", "testPicture", ProviderType.GOOGLE);
 		Guest guest = sut.createNewGuest(info);
 
 		assertNewGuset(info, guest);
@@ -38,14 +40,14 @@ class GuestServiceImplTest {
 	@DisplayName("Guest를 생성한다. (회원가입 시도 했던적 O)")
 	@Sql("classpath:atdd/okr/insert-guest.sql")
 	void create_new_guest_when_exist() {
-		OAuth2UserInfo info = new OAuth2UserInfo("testId", "testName", "testEmail@mail.com", "testPicture", ProviderType.GOOGLE);
+		UserInfo info = new UserInfo(UserInfoType.GUEST,"testId", "testName", "testEmail@mail.com", "testPicture", ProviderType.GOOGLE);
 		Guest guest = sut.createNewGuest(info);
 
 		assertExistedGuest(info, guest);
 	}
 
 
-	private void assertNewGuset(OAuth2UserInfo info, Guest guest) {
+	private void assertNewGuset(UserInfo info, Guest guest) {
 		assertThat(guest.getGuestName()).isEqualTo(info.name());
 		assertThat(guest.getEmail()).isEqualTo(info.email());
 		assertThat(guest.getGuestId()).isEqualTo(info.id());
@@ -56,7 +58,7 @@ class GuestServiceImplTest {
 		);
 	}
 
-	private void assertExistedGuest(OAuth2UserInfo info, Guest guest) {
+	private void assertExistedGuest(UserInfo info, Guest guest) {
 		assertThat(guest.getGuestName()).isEqualTo(info.name());
 		assertThat(guest.getEmail()).isEqualTo(info.email());
 		assertThat(guest.getGuestId()).isEqualTo(info.id());

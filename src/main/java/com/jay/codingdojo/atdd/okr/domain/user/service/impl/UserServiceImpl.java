@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.User;
 import com.jay.codingdojo.atdd.okr.domain.user.UserRepository;
-import com.jay.codingdojo.atdd.okr.domain.user.service.UserWholeInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfo;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.TokenVerifier;
@@ -28,9 +28,12 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public UserWholeInfo getUserWholeInfoFromIdToken(ProviderType provider, String idToken) {
+	public UserInfo getUserWholeInfoFromIdToken(ProviderType provider, String idToken) {
 		OAuth2UserInfo userInfo = tokenVerifier.verifyIdToken(idToken);
 		Optional<User> user = userRepository.findByEmail(userInfo.email());
-		return new UserWholeInfo(user, userInfo);
+		if(user.isPresent()) {
+			return new UserInfo(user.get());
+		}
+		return new UserInfo(userInfo);
 	}
 }

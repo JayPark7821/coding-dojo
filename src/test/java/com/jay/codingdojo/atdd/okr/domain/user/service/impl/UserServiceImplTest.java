@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
-import com.jay.codingdojo.atdd.okr.domain.user.User;
-import com.jay.codingdojo.atdd.okr.domain.user.service.UserWholeInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfoType;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.GoogleTokenVerifier;
 import com.jay.codingdojo.atdd.okr.interfaces.user.auth.OAuth2UserInfo;
 
@@ -33,7 +33,7 @@ class UserServiceImplTest {
 	private UserServiceImpl sut;
 
 	@Test
-	@DisplayName("ProviderType과 idToken으로 인증하고 인증된 정보로 user테이블 조회 그결과를 인증된 정보화 함께 UserWholeInfo로 반환한다. user정보 없는 케이스")
+	@DisplayName("ProviderType과 idToken으로 인증하고 인증된 정보로 user테이블 조회 그결과를 인증된 정보화 함께 UserInfo로 반환한다. user정보 없는 케이스")
 	void request_userWholeInfo_by_providerType_and_idToken() throws Exception {
 		String userId = "testId";
 		String userName = "testUser";
@@ -41,11 +41,11 @@ class UserServiceImplTest {
 		String userPicture = "testPicture";
 		stubGoogleTokenVerifier(userId, userName, userEmail,userPicture);
 
-		UserWholeInfo userWholeInfo = sut.getUserWholeInfoFromIdToken(ProviderType.GOOGLE, "idToken");
+		UserInfo userInfo = sut.getUserWholeInfoFromIdToken(ProviderType.GOOGLE, "idToken");
 
-		Assertions.assertThat(userWholeInfo)
+		Assertions.assertThat(userInfo)
 			.isEqualTo(
-				new UserWholeInfo(Optional.empty(), new OAuth2UserInfo(userId, userName, userEmail, userPicture, ProviderType.GOOGLE)));
+				new UserInfo(UserInfoType.GUEST, userId, userName, userEmail, userPicture, ProviderType.GOOGLE));
 	}
 
 	@Test
@@ -55,15 +55,13 @@ class UserServiceImplTest {
 		String userId = "testId";
 		String userName = "testUser";
 		String userEmail = "test@email.com";
-		String userPicture = "testPicture";
+		String userPicture = "pic";
 		stubGoogleTokenVerifier(userId, userName, userEmail,userPicture);
 
-		UserWholeInfo userWholeInfo = sut.getUserWholeInfoFromIdToken(ProviderType.GOOGLE, "idToken");
+		UserInfo userInfo = sut.getUserWholeInfoFromIdToken(ProviderType.GOOGLE, "idToken");
 
-		Assertions.assertThat(userWholeInfo.oAuth2UserInfo())
-			.isEqualTo(new OAuth2UserInfo(userId, userName, userEmail, userPicture, ProviderType.GOOGLE));
-		Assertions.assertThat(userWholeInfo.user().get().getUserSeq())
-			.isEqualTo(1L);
+		Assertions.assertThat(userInfo)
+			.isEqualTo(new UserInfo( UserInfoType.USER, userId, userName, userEmail, userPicture, ProviderType.GOOGLE));
 	}
 
 	private void stubGoogleTokenVerifier(String userId, String userName, String userEmail, String userPicture) {

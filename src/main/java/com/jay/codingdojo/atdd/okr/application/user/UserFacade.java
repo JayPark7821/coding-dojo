@@ -8,7 +8,8 @@ import com.jay.codingdojo.atdd.okr.domain.guest.service.GuestService;
 import com.jay.codingdojo.atdd.okr.domain.token.service.TokenService;
 import com.jay.codingdojo.atdd.okr.domain.user.ProviderType;
 import com.jay.codingdojo.atdd.okr.domain.user.User;
-import com.jay.codingdojo.atdd.okr.domain.user.service.UserWholeInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfo;
+import com.jay.codingdojo.atdd.okr.domain.user.service.UserInfoType;
 import com.jay.codingdojo.atdd.okr.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,16 +25,19 @@ public class UserFacade {
 	private final TokenService tokenService;
 
 	public LoginInfo loginWithIdToken(ProviderType provider, String idToken) {
-		UserWholeInfo userWholeInfo = userService.getUserWholeInfoFromIdToken(provider, idToken);
-		Optional<User> user = userWholeInfo.user();
+		UserInfo userInfo = userService.getUserWholeInfoFromIdToken(provider, idToken);
 
-		if (user.isPresent()) {
-			User joinedUser = user.get();
-			if (joinedUser.canUserLogin(provider)) {
-				return new LoginInfo(joinedUser, tokenService.generateTokenSet(joinedUser.getEmail()));
-			}
+		if (userInfo.userInfoType() == UserInfoType.USER) {
+			validateProvider(provider, userInfo);
+			return new LoginInfo(userInfo, tokenService.generateTokenSet(userInfo.email()));
 		}
-		return new LoginInfo(guestService.createNewGuest(userWholeInfo.oAuth2UserInfo()));
-
+		return new LoginInfo(guestService.createNewGuest(userInfo));
 	}
+
+	private void validateProvider(ProviderType provider, UserInfo userInfo) {
+		if (userInfo.providerType() != provider) {
+			throw new IllegalStateException(userInfo.providerType() + "(으)로 가입한 계정이 있습니다.");
+		}
+	}
+
 }
